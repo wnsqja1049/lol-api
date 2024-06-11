@@ -64,7 +64,7 @@ export const MainPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks |
 			)
 		}
 	}
-	
+
 	return (<></>)
 };
 export const SubPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks | undefined, perkMap: Map<string, Perk> | undefined }) => {
@@ -120,6 +120,7 @@ export const SubPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks | 
 			)
 		}
 	}
+	return (<></>)
 };
 export const StatPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks | undefined, perkMap: Map<string, Perk> | undefined }) => {
 	/* 
