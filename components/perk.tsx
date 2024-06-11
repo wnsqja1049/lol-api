@@ -219,6 +219,7 @@ export const StatPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks |
 			</div>
 		)
 	}
+	return (<></>);
 };
 
 export const ModalMainPerkIcon = ({ data, size, selectedId }: { data: Perk | undefined, size: number, selectedId: number }) => {
