@@ -117,7 +117,7 @@ export const MatchListItem = ({
                                     {/* 게임정보 */}
                                     <TableCell className={bgColor + "w-[120px] text-match-table"}>
                                         <div className={textColor + "font-bold"}>{getGameType(match.info.queueId)}</div>
-                                        <TimeStampToTimeBefore timeStamp={match.info.gameEndTimestamp} />
+                                        <TimeStampToTimeBefore timeStamp={match.info.gameEndTimestamp!} />
                                         <div className="flex flex-row gap-1">
                                         <div className={textColor + "font-bold"}>{isUserWin(searchedUser.puuid, match) ? '승리' : '패배'}</div>
                                             <CompactGameDuration gameDuration={match.info.gameDuration} />
