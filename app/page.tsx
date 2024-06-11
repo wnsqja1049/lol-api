@@ -1,5 +1,6 @@
 /* Component */
 import { MatchPageComponent } from "@/components/page/match-page";
+import { Suspense } from "react";
 
 /* NextUI */
 import { 
@@ -12,7 +13,9 @@ export default function Home() {
 			<div className="flex justify-center mb-5">
 				<Image width={200} height={200} radius="lg" alt={"4568"} src={`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/profileicon/4568.png`} />
 			</div>
+			<Suspense>
 			<MatchPageComponent/>
+			</Suspense>
 		</div>
 	);
 }
