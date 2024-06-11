@@ -1,0 +1,839 @@
+{
+    "champion": {
+        "1": {
+            "championId": 1,
+            "championName": "Annie",
+            "championNameKr": "애니"
+        },
+        "2": {
+            "championId": 2,
+            "championName": "Olaf",
+            "championNameKr": "올라프"
+        },
+        "3": {
+            "championId": 3,
+            "championName": "Galio",
+            "championNameKr": "갈리오"
+        },
+        "4": {
+            "championId": 4,
+            "championName": "TwistedFate",
+            "championNameKr": "트위스티드 페이트"
+        },
+        "5": {
+            "championId": 5,
+            "championName": "XinZhao",
+            "championNameKr": "신 짜오"
+        },
+        "6": {
+            "championId": 6,
+            "championName": "Urgot",
+            "championNameKr": "우르곳"
+        },
+        "7": {
+            "championId": 7,
+            "championName": "Leblanc",
+            "championNameKr": "르블랑"
+        },
+        "8": {
+            "championId": 8,
+            "championName": "Vladimir",
+            "championNameKr": "블라디미르"
+        },
+        "9": {
+            "championId": 9,
+            "championName": "Fiddlesticks",
+            "championNameKr": "피들스틱"
+        },
+        "10": {
+            "championId": 10,
+            "championName": "Kayle",
+            "championNameKr": "케일"
+        },
+        "11": {
+            "championId": 11,
+            "championName": "MasterYi",
+            "championNameKr": "마스터 이"
+        },
+        "12": {
+            "championId": 12,
+            "championName": "Alistar",
+            "championNameKr": "알리스타"
+        },
+        "13": {
+            "championId": 13,
+            "championName": "Ryze",
+            "championNameKr": "라이즈"
+        },
+        "14": {
+            "championId": 14,
+            "championName": "Sion",
+            "championNameKr": "사이온"
+        },
+        "15": {
+            "championId": 15,
+            "championName": "Sivir",
+            "championNameKr": "시비르"
+        },
+        "16": {
+            "championId": 16,
+            "championName": "Soraka",
+            "championNameKr": "소라카"
+        },
+        "17": {
+            "championId": 17,
+            "championName": "Teemo",
+            "championNameKr": "티모"
+        },
+        "18": {
+            "championId": 18,
+            "championName": "Tristana",
+            "championNameKr": "트리스타나"
+        },
+        "19": {
+            "championId": 19,
+            "championName": "Warwick",
+            "championNameKr": "워윅"
+        },
+        "20": {
+            "championId": 20,
+            "championName": "Nunu",
+            "championNameKr": "누누와 윌럼프"
+        },
+        "21": {
+            "championId": 21,
+            "championName": "MissFortune",
+            "championNameKr": "미스 포츈"
+        },
+        "22": {
+            "championId": 22,
+            "championName": "Ashe",
+            "championNameKr": "애쉬"
+        },
+        "23": {
+            "championId": 23,
+            "championName": "Tryndamere",
+            "championNameKr": "트린다미어"
+        },
+        "24": {
+            "championId": 24,
+            "championName": "Jax",
+            "championNameKr": "잭스"
+        },
+        "25": {
+            "championId": 25,
+            "championName": "Morgana",
+            "championNameKr": "모르가나"
+        },
+        "26": {
+            "championId": 26,
+            "championName": "Zilean",
+            "championNameKr": "질리언"
+        },
+        "27": {
+            "championId": 27,
+            "championName": "Singed",
+            "championNameKr": "신지드"
+        },
+        "28": {
+            "championId": 28,
+            "championName": "Evelynn",
+            "championNameKr": "이블린"
+        },
+        "29": {
+            "championId": 29,
+            "championName": "Twitch",
+            "championNameKr": "트위치"
+        },
+        "30": {
+            "championId": 30,
+            "championName": "Karthus",
+            "championNameKr": "카서스"
+        },
+        "31": {
+            "championId": 31,
+            "championName": "Chogath",
+            "championNameKr": "초가스"
+        },
+        "32": {
+            "championId": 32,
+            "championName": "Amumu",
+            "championNameKr": "아무무"
+        },
+        "33": {
+            "championId": 33,
+            "championName": "Rammus",
+            "championNameKr": "람머스"
+        },
+        "34": {
+            "championId": 34,
+            "championName": "Anivia",
+            "championNameKr": "애니비아"
+        },
+        "35": {
+            "championId": 35,
+            "championName": "Shaco",
+            "championNameKr": "샤코"
+        },
+        "36": {
+            "championId": 36,
+            "championName": "DrMundo",
+            "championNameKr": "문도 박사"
+        },
+        "37": {
+            "championId": 37,
+            "championName": "Sona",
+            "championNameKr": "소나"
+        },
+        "38": {
+            "championId": 38,
+            "championName": "Kassadin",
+            "championNameKr": "카사딘"
+        },
+        "39": {
+            "championId": 39,
+            "championName": "Irelia",
+            "championNameKr": "이렐리아"
+        },
+        "40": {
+            "championId": 40,
+            "championName": "Janna",
+            "championNameKr": "잔나"
+        },
+        "41": {
+            "championId": 41,
+            "championName": "Gangplank",
+            "championNameKr": "갱플랭크"
+        },
+        "42": {
+            "championId": 42,
+            "championName": "Corki",
+            "championNameKr": "코르키"
+        },
+        "43": {
+            "championId": 43,
+            "championName": "Karma",
+            "championNameKr": "카르마"
+        },
+        "44": {
+            "championId": 44,
+            "championName": "Taric",
+            "championNameKr": "타릭"
+        },
+        "45": {
+            "championId": 45,
+            "championName": "Veigar",
+            "championNameKr": "베이가"
+        },
+        "48": {
+            "championId": 48,
+            "championName": "Trundle",
+            "championNameKr": "트런들"
+        },
+        "50": {
+            "championId": 50,
+            "championName": "Swain",
+            "championNameKr": "스웨인"
+        },
+        "51": {
+            "championId": 51,
+            "championName": "Caitlyn",
+            "championNameKr": "케이틀린"
+        },
+        "53": {
+            "championId": 53,
+            "championName": "Blitzcrank",
+            "championNameKr": "블리츠크랭크"
+        },
+        "54": {
+            "championId": 54,
+            "championName": "Malphite",
+            "championNameKr": "말파이트"
+        },
+        "55": {
+            "championId": 55,
+            "championName": "Katarina",
+            "championNameKr": "카타리나"
+        },
+        "56": {
+            "championId": 56,
+            "championName": "Nocturne",
+            "championNameKr": "녹턴"
+        },
+        "57": {
+            "championId": 57,
+            "championName": "Maokai",
+            "championNameKr": "마오카이"
+        },
+        "58": {
+            "championId": 58,
+            "championName": "Renekton",
+            "championNameKr": "레넥톤"
+        },
+        "59": {
+            "championId": 59,
+            "championName": "JarvanIV",
+            "championNameKr": "자르반 4세"
+        },
+        "60": {
+            "championId": 60,
+            "championName": "Elise",
+            "championNameKr": "엘리스"
+        },
+        "61": {
+            "championId": 61,
+            "championName": "Orianna",
+            "championNameKr": "오리아나"
+        },
+        "62": {
+            "championId": 62,
+            "championName": "MonkeyKing",
+            "championNameKr": "오공"
+        },
+        "63": {
+            "championId": 63,
+            "championName": "Brand",
+            "championNameKr": "브랜드"
+        },
+        "64": {
+            "championId": 64,
+            "championName": "LeeSin",
+            "championNameKr": "리 신"
+        },
+        "67": {
+            "championId": 67,
+            "championName": "Vayne",
+            "championNameKr": "베인"
+        },
+        "68": {
+            "championId": 68,
+            "championName": "Rumble",
+            "championNameKr": "럼블"
+        },
+        "69": {
+            "championId": 69,
+            "championName": "Cassiopeia",
+            "championNameKr": "카시오페아"
+        },
+        "72": {
+            "championId": 72,
+            "championName": "Skarner",
+            "championNameKr": "스카너"
+        },
+        "74": {
+            "championId": 74,
+            "championName": "Heimerdinger",
+            "championNameKr": "하이머딩거"
+        },
+        "75": {
+            "championId": 75,
+            "championName": "Nasus",
+            "championNameKr": "나서스"
+        },
+        "76": {
+            "championId": 76,
+            "championName": "Nidalee",
+            "championNameKr": "니달리"
+        },
+        "77": {
+            "championId": 77,
+            "championName": "Udyr",
+            "championNameKr": "우디르"
+        },
+        "78": {
+            "championId": 78,
+            "championName": "Poppy",
+            "championNameKr": "뽀삐"
+        },
+        "79": {
+            "championId": 79,
+            "championName": "Gragas",
+            "championNameKr": "그라가스"
+        },
+        "80": {
+            "championId": 80,
+            "championName": "Pantheon",
+            "championNameKr": "판테온"
+        },
+        "81": {
+            "championId": 81,
+            "championName": "Ezreal",
+            "championNameKr": "이즈리얼"
+        },
+        "82": {
+            "championId": 82,
+            "championName": "Mordekaiser",
+            "championNameKr": "모데카이저"
+        },
+        "83": {
+            "championId": 83,
+            "championName": "Yorick",
+            "championNameKr": "요릭"
+        },
+        "84": {
+            "championId": 84,
+            "championName": "Akali",
+            "championNameKr": "아칼리"
+        },
+        "85": {
+            "championId": 85,
+            "championName": "Kennen",
+            "championNameKr": "케넨"
+        },
+        "86": {
+            "championId": 86,
+            "championName": "Garen",
+            "championNameKr": "가렌"
+        },
+        "89": {
+            "championId": 89,
+            "championName": "Leona",
+            "championNameKr": "레오나"
+        },
+        "90": {
+            "championId": 90,
+            "championName": "Malzahar",
+            "championNameKr": "말자하"
+        },
+        "91": {
+            "championId": 91,
+            "championName": "Talon",
+            "championNameKr": "탈론"
+        },
+        "92": {
+            "championId": 92,
+            "championName": "Riven",
+            "championNameKr": "리븐"
+        },
+        "96": {
+            "championId": 96,
+            "championName": "KogMaw",
+            "championNameKr": "코그모"
+        },
+        "98": {
+            "championId": 98,
+            "championName": "Shen",
+            "championNameKr": "쉔"
+        },
+        "99": {
+            "championId": 99,
+            "championName": "Lux",
+            "championNameKr": "럭스"
+        },
+        "101": {
+            "championId": 101,
+            "championName": "Xerath",
+            "championNameKr": "제라스"
+        },
+        "102": {
+            "championId": 102,
+            "championName": "Shyvana",
+            "championNameKr": "쉬바나"
+        },
+        "103": {
+            "championId": 103,
+            "championName": "Ahri",
+            "championNameKr": "아리"
+        },
+        "104": {
+            "championId": 104,
+            "championName": "Graves",
+            "championNameKr": "그레이브즈"
+        },
+        "105": {
+            "championId": 105,
+            "championName": "Fizz",
+            "championNameKr": "피즈"
+        },
+        "106": {
+            "championId": 106,
+            "championName": "Volibear",
+            "championNameKr": "볼리베어"
+        },
+        "107": {
+            "championId": 107,
+            "championName": "Rengar",
+            "championNameKr": "렝가"
+        },
+        "110": {
+            "championId": 110,
+            "championName": "Varus",
+            "championNameKr": "바루스"
+        },
+        "111": {
+            "championId": 111,
+            "championName": "Nautilus",
+            "championNameKr": "노틸러스"
+        },
+        "112": {
+            "championId": 112,
+            "championName": "Viktor",
+            "championNameKr": "빅토르"
+        },
+        "113": {
+            "championId": 113,
+            "championName": "Sejuani",
+            "championNameKr": "세주아니"
+        },
+        "114": {
+            "championId": 114,
+            "championName": "Fiora",
+            "championNameKr": "피오라"
+        },
+        "115": {
+            "championId": 115,
+            "championName": "Ziggs",
+            "championNameKr": "직스"
+        },
+        "117": {
+            "championId": 117,
+            "championName": "Lulu",
+            "championNameKr": "룰루"
+        },
+        "119": {
+            "championId": 119,
+            "championName": "Draven",
+            "championNameKr": "드레이븐"
+        },
+        "120": {
+            "championId": 120,
+            "championName": "Hecarim",
+            "championNameKr": "헤카림"
+        },
+        "121": {
+            "championId": 121,
+            "championName": "Khazix",
+            "championNameKr": "카직스"
+        },
+        "122": {
+            "championId": 122,
+            "championName": "Darius",
+            "championNameKr": "다리우스"
+        },
+        "126": {
+            "championId": 126,
+            "championName": "Jayce",
+            "championNameKr": "제이스"
+        },
+        "127": {
+            "championId": 127,
+            "championName": "Lissandra",
+            "championNameKr": "리산드라"
+        },
+        "131": {
+            "championId": 131,
+            "championName": "Diana",
+            "championNameKr": "다이애나"
+        },
+        "133": {
+            "championId": 133,
+            "championName": "Quinn",
+            "championNameKr": "퀸"
+        },
+        "134": {
+            "championId": 134,
+            "championName": "Syndra",
+            "championNameKr": "신드라"
+        },
+        "136": {
+            "championId": 136,
+            "championName": "AurelionSol",
+            "championNameKr": "아우렐리온 솔"
+        },
+        "141": {
+            "championId": 141,
+            "championName": "Kayn",
+            "championNameKr": "케인"
+        },
+        "142": {
+            "championId": 142,
+            "championName": "Zoe",
+            "championNameKr": "조이"
+        },
+        "143": {
+            "championId": 143,
+            "championName": "Zyra",
+            "championNameKr": "자이라"
+        },
+        "145": {
+            "championId": 145,
+            "championName": "Kaisa",
+            "championNameKr": "카이사"
+        },
+        "147": {
+            "championId": 147,
+            "championName": "Seraphine",
+            "championNameKr": "세라핀"
+        },
+        "150": {
+            "championId": 150,
+            "championName": "Gnar",
+            "championNameKr": "나르"
+        },
+        "154": {
+            "championId": 154,
+            "championName": "Zac",
+            "championNameKr": "자크"
+        },
+        "157": {
+            "championId": 157,
+            "championName": "Yasuo",
+            "championNameKr": "야스오"
+        },
+        "161": {
+            "championId": 161,
+            "championName": "Velkoz",
+            "championNameKr": "벨코즈"
+        },
+        "163": {
+            "championId": 163,
+            "championName": "Taliyah",
+            "championNameKr": "탈리야"
+        },
+        "164": {
+            "championId": 164,
+            "championName": "Camille",
+            "championNameKr": "카밀"
+        },
+        "166": {
+            "championId": 166,
+            "championName": "Akshan",
+            "championNameKr": "아크샨"
+        },
+        "200": {
+            "championId": 200,
+            "championName": "Belveth",
+            "championNameKr": "벨베스"
+        },
+        "201": {
+            "championId": 201,
+            "championName": "Braum",
+            "championNameKr": "브라움"
+        },
+        "202": {
+            "championId": 202,
+            "championName": "Jhin",
+            "championNameKr": "진"
+        },
+        "203": {
+            "championId": 203,
+            "championName": "Kindred",
+            "championNameKr": "킨드레드"
+        },
+        "221": {
+            "championId": 221,
+            "championName": "Zeri",
+            "championNameKr": "제리"
+        },
+        "222": {
+            "championId": 222,
+            "championName": "Jinx",
+            "championNameKr": "징크스"
+        },
+        "223": {
+            "championId": 223,
+            "championName": "TahmKench",
+            "championNameKr": "탐 켄치"
+        },
+        "233": {
+            "championId": 233,
+            "championName": "Briar",
+            "championNameKr": "브라이어"
+        },
+        "234": {
+            "championId": 234,
+            "championName": "Viego",
+            "championNameKr": "비에고"
+        },
+        "235": {
+            "championId": 235,
+            "championName": "Senna",
+            "championNameKr": "세나"
+        },
+        "236": {
+            "championId": 236,
+            "championName": "Lucian",
+            "championNameKr": "루시안"
+        },
+        "238": {
+            "championId": 238,
+            "championName": "Zed",
+            "championNameKr": "제드"
+        },
+        "240": {
+            "championId": 240,
+            "championName": "Kled",
+            "championNameKr": "클레드"
+        },
+        "245": {
+            "championId": 245,
+            "championName": "Ekko",
+            "championNameKr": "에코"
+        },
+        "246": {
+            "championId": 246,
+            "championName": "Qiyana",
+            "championNameKr": "키아나"
+        },
+        "254": {
+            "championId": 254,
+            "championName": "Vi",
+            "championNameKr": "바이"
+        },
+        "266": {
+            "championId": 266,
+            "championName": "Aatrox",
+            "championNameKr": "아트록스"
+        },
+        "267": {
+            "championId": 267,
+            "championName": "Nami",
+            "championNameKr": "나미"
+        },
+        "268": {
+            "championId": 268,
+            "championName": "Azir",
+            "championNameKr": "아지르"
+        },
+        "350": {
+            "championId": 350,
+            "championName": "Yuumi",
+            "championNameKr": "유미"
+        },
+        "360": {
+            "championId": 360,
+            "championName": "Samira",
+            "championNameKr": "사미라"
+        },
+        "412": {
+            "championId": 412,
+            "championName": "Thresh",
+            "championNameKr": "쓰레쉬"
+        },
+        "420": {
+            "championId": 420,
+            "championName": "Illaoi",
+            "championNameKr": "일라오이"
+        },
+        "421": {
+            "championId": 421,
+            "championName": "RekSai",
+            "championNameKr": "렉사이"
+        },
+        "427": {
+            "championId": 427,
+            "championName": "Ivern",
+            "championNameKr": "아이번"
+        },
+        "429": {
+            "championId": 429,
+            "championName": "Kalista",
+            "championNameKr": "칼리스타"
+        },
+        "432": {
+            "championId": 432,
+            "championName": "Bard",
+            "championNameKr": "바드"
+        },
+        "497": {
+            "championId": 497,
+            "championName": "Rakan",
+            "championNameKr": "라칸"
+        },
+        "498": {
+            "championId": 498,
+            "championName": "Xayah",
+            "championNameKr": "자야"
+        },
+        "516": {
+            "championId": 516,
+            "championName": "Ornn",
+            "championNameKr": "오른"
+        },
+        "517": {
+            "championId": 517,
+            "championName": "Sylas",
+            "championNameKr": "사일러스"
+        },
+        "518": {
+            "championId": 518,
+            "championName": "Neeko",
+            "championNameKr": "니코"
+        },
+        "523": {
+            "championId": 523,
+            "championName": "Aphelios",
+            "championNameKr": "아펠리오스"
+        },
+        "526": {
+            "championId": 526,
+            "championName": "Rell",
+            "championNameKr": "렐"
+        },
+        "555": {
+            "championId": 555,
+            "championName": "Pyke",
+            "championNameKr": "파이크"
+        },
+        "711": {
+            "championId": 711,
+            "championName": "Vex",
+            "championNameKr": "벡스"
+        },
+        "777": {
+            "championId": 777,
+            "championName": "Yone",
+            "championNameKr": "요네"
+        },
+        "875": {
+            "championId": 875,
+            "championName": "Sett",
+            "championNameKr": "세트"
+        },
+        "876": {
+            "championId": 876,
+            "championName": "Lillia",
+            "championNameKr": "릴리아"
+        },
+        "887": {
+            "championId": 887,
+            "championName": "Gwen",
+            "championNameKr": "그웬"
+        },
+        "888": {
+            "championId": 888,
+            "championName": "Renata",
+            "championNameKr": "레나타 글라스크"
+        },
+        "895": {
+            "championId": 895,
+            "championName": "Nilah",
+            "championNameKr": "닐라"
+        },
+        "897": {
+            "championId": 897,
+            "championName": "KSante",
+            "championNameKr": "크산테"
+        },
+        "901": {
+            "championId": 901,
+            "championName": "Smolder",
+            "championNameKr": "스몰더"
+        },
+        "902": {
+            "championId": 902,
+            "championName": "milio",
+            "championNameKr": "밀리오"
+        },
+        "910": {
+            "championId": 910,
+            "championName": "Hwei",
+            "championNameKr": "흐웨이"
+        },
+        "950": {
+            "championId": 950,
+            "championName": "Naafiri",
+            "championNameKr": "나피리"
+        }
+    }
+}

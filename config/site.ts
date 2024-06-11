@@ -4,59 +4,39 @@ export const siteConfig = {
 	name: "Next.js + NextUI",
 	description: "Make beautiful websites regardless of your design experience.",
 	navItems: [
-		{
-			label: "Home",
-			href: "/",
-		},
+	{
+		label: "홈",
+		href: "/",
+	},
     {
-      label: "Docs",
-      href: "/docs",
+      label: "전적",
+      href: "/match",
     },
     {
-      label: "Pricing",
-      href: "/pricing",
+      label: "아이템",
+      href: "/item",
     },
     {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
+      label: "챔피언",
+      href: "/champion",
     }
 	],
 	navMenuItems: [
 		{
-			label: "Profile",
-			href: "/profile",
+			label: "홈",
+			href: "/",
 		},
 		{
-			label: "Dashboard",
-			href: "/dashboard",
+		  label: "전적",
+		  href: "/match",
 		},
 		{
-			label: "Projects",
-			href: "/projects",
+			label: "아이템",
+			href: "/item",
 		},
 		{
-			label: "Team",
-			href: "/team",
-		},
-		{
-			label: "Calendar",
-			href: "/calendar",
-		},
-		{
-			label: "Settings",
-			href: "/settings",
-		},
-		{
-			label: "Help & Feedback",
-			href: "/help-feedback",
-		},
-		{
-			label: "Logout",
-			href: "/logout",
+			label: "챔피언",
+			href: "/champion",
 		},
 	],
 	links: {
