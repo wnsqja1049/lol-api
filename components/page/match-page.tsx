@@ -34,36 +34,40 @@ import {
     fetchPerkList, 
     fetchAugmentList, 
 } from "@/data/api";
+import {
+    errorAccountByName,
+    errorProfile,  
+    errorRank, 
+    errorMatches, 
+    errorMatch, 
+    errorAugmentList, 
+    errorPerkList, 
+    errorChampion,
+    errorChampionList,
+    errorSpellList,
+    errorItemList, 
+} from "@/data/apiError";
 
 import {
     getSearchUser, 
-    getUserTeam, 
     setTeams, 
-    getTierText, 
-    getTierNumberText, 
-    getWinRate, 
-    GetSearchHistoryList,
 } from "@/data/functions";
 
 /* NextUI */
 import {
     Input,
-    Badge, Avatar,
     Modal, ModalContent, ModalProps, useDisclosure,
     Button,
-    Chip,
     CircularProgress, 
-    Card, CardHeader, CardBody, Divider, Image, 
 } from "@nextui-org/react";
 
 /* Component */
 import { ChampionModal } from "@/components/modal/champion-modal"
 import { PerkModal } from "@/components/modal/perk-modal"
-import { TimeStampToTimeBefore } from "@/components/timer"
 
 import { SearchList } from "@/components/list/search-list"
 import { MatchListItem } from "@/components/list/match-list"
-import { SearchHistoryChip } from "@/components/chip"
+import { ProfileCard, RankCard } from "@/components/card"
 
 export const MatchPageComponent = () => {
 
@@ -83,7 +87,6 @@ export const MatchPageComponent = () => {
 
     const [matchIdList, setMatchIdList] = useState<string[]>();
     const [matchList, setMatchList] = useState<Match[]>();
-    const [match, setMatch] = useState<Match>();
 
     const [championMap, setChampionMap] = useState<Map<string, Champion>>();
     const [itemMap, setItemMap] = useState<Map<string, Item>>();
@@ -105,26 +108,34 @@ export const MatchPageComponent = () => {
     }, [value]);
 
     useEffect(() => {
-        var summoners: UserName[] = GetSearchHistoryList();
+        var data = localStorage.getItem("searchUserList");
+        var nameList: any[] = [];
+
+		if(data != null) {
+			nameList = JSON.parse(data);
+		}
+
+        var summoners: UserName[] = nameList;
         setSummoners(summoners);
 
-        getChampionMap();
-        getSpellMap();
-        getItemMap();
-        getPerkMap();
-        getAugmentMap();
+        if(!championMap) getChampionMap();
+        if(!spellMap) getSpellMap();
+        if(!itemMap) getItemMap();
+        if(!perkMap) getPerkMap();
+        if(!augmentMap) getAugmentMap();
 
         var gameName = searchParams.get("gameName");
         var tagLine = searchParams.get("tagLine");
 
-        if(gameName && tagLine) {
-            getAccountAndProfile(gameName, tagLine);
+        if(!account) {
+            if(!profile) {
+                if(gameName && tagLine) {
+                    getAccountAndProfile(gameName, tagLine);
+                    setValue(gameName + '#' + tagLine);
+                }
+            }
         }
     }, [])
-
-    useEffect(() => {
-    }, [summoners])
-
 
     const setSearchParam = (gameName: string, tagLine: string) => {
         const params = new URLSearchParams(searchParams);
@@ -151,8 +162,6 @@ export const MatchPageComponent = () => {
         setValue(name.gameName + '#' + name.tagLine);
 
         getAccountAndProfile(name.gameName, name.tagLine);
-
-        return;
     };
     const handleDeleteHistory = (name: UserName) => {
 
@@ -160,6 +169,20 @@ export const MatchPageComponent = () => {
 
         setSummoners(filteredNameList);
         localStorage.setItem('searchUserList', JSON.stringify(filteredNameList));
+    };
+    const handleClickRecommand = async (name: UserName) => {
+
+        setSearchParam(name.gameName, name.tagLine);
+
+        setValue(name.gameName + '#' + name.tagLine);
+
+        getAccountAndProfile(name.gameName, name.tagLine);
+
+        
+        var newSummoners = summoners;
+        newSummoners.unshift({ gameName: name.gameName, tagLine: name.tagLine });
+        setSummoners(newSummoners);
+        localStorage.setItem('searchUserList', JSON.stringify(newSummoners));
     };
     const handleKeyDown = (e: any) => {
         if (e.key === 'Enter') {
@@ -238,39 +261,18 @@ export const MatchPageComponent = () => {
                     }
 
                 } else {
-                    if (rankResponse.status.status_code === 403) {
-                        alert('API 키가 만료되었습니다.');
-                    }
-                    if (rankResponse.status.status_code === 429) {
-                        alert('API 요청 한계를 초과하였습니다. 잠시 후 다시 시도해 주세요.');
-                    }
+                    errorRank(rankResponse.status.status_code);
                 }
                 setProfile(profile);
 
                 getMatches(profile.puuid);
 
             } else {
-                if (profileResponse.status.status_code === 403) {
-                    alert('API 키가 만료되었습니다.');
-                }
-                if (profileResponse.status.status_code === 404) {
-                    alert('소환사 정보를 찾을 수 없습니다.');
-                }
-                if (profileResponse.status.status_code === 429) {
-                    alert('API 요청 한계를 초과하였습니다. 잠시 후 다시 시도해 주세요.');
-                }
+                errorProfile(profileResponse.status.status_code);
             }
 
         } else {
-            if (accountResponse.status.status_code === 403) {
-                alert('API 키가 만료되었습니다.');
-            }
-            if (accountResponse.status.status_code === 404) {
-                alert('소환사 정보를 찾을 수 없습니다.');
-            }
-            if (accountResponse.status.status_code === 429) {
-                alert('API 요청 한계를 초과하였습니다. 잠시 후 다시 시도해 주세요.');
-            }
+            errorAccountByName(accountResponse.status.status_code);
         }
     }
 
@@ -294,12 +296,7 @@ export const MatchPageComponent = () => {
             setMatchList(matchList);
 
         } else {
-            if (res.status.status_code === 403) {
-                alert('API 키가 만료되었습니다.');
-            }
-            if (res.status.status_code === 404) {
-                alert('매치 정보를 찾을 수 없습니다.');
-            }
+            errorMatches(res.status.status_code);
         }
     }
     const getNewMatch = async (matchId: string) => {
@@ -309,6 +306,8 @@ export const MatchPageComponent = () => {
         if (res.status.status_code === 200) {
             var match = await res.data;
             return match;
+        } else {
+            errorMatch(res.status.status_code)
         }
     }
 
@@ -331,7 +330,7 @@ export const MatchPageComponent = () => {
 
             setChampionMap(championMap);
         } else {
-            alert('데이터 오류.');
+            errorChampionList(res.status.status_code);
         }
     }
     const getSpellMap = async () => {
@@ -351,7 +350,7 @@ export const MatchPageComponent = () => {
 
             setSpellMap(spellMap);
         } else {
-            alert('데이터 오류.');
+            errorSpellList(res.status.status_code);
         }
     }
     const getItemMap = async () => {
@@ -372,7 +371,7 @@ export const MatchPageComponent = () => {
 
             setItemMap(itemMap);
         } else {
-            alert('데이터 오류.');
+            errorItemList(res.status.status_code);
         }
     }
     const getPerkMap = async () => {
@@ -404,7 +403,7 @@ export const MatchPageComponent = () => {
 
             setPerkMap(perkMap);
         } else {
-            alert('데이터 오류.');
+            errorPerkList(res.status.status_code);
         }
     }
     const getAugmentMap = async () => {
@@ -425,7 +424,7 @@ export const MatchPageComponent = () => {
             setAugmentMap(augmentMap);
 
         } else {
-            alert('데이터 오류.');
+            errorAugmentList(res.status.status_code);
         }
     }
 
@@ -460,75 +459,18 @@ export const MatchPageComponent = () => {
                 <Button className="h-[56px]" color="primary" onPress={() => search(value)}>검색</Button>
             </div>
 
-
             <SearchList
-                handleClick={(name) => handleClickHistory(name)}
+                summoners={summoners}
+                handleClickRecommand={(name) => handleClickRecommand(name)}
+                handleClickHistory={(name) => handleClickHistory(name)}
                 handleClose={(name) => handleDeleteHistory(name)} />
 
             {account && profile ?
                 <div>
                     <div className="flex flex-wrap gap-2 mb-5">
-                        <Card className="w-[350px] dark:bg-zinc-900 border-1 dark:border-0">
-                            <CardBody className="flex gap-3">
-                                <div className="p-4 flex flex-row space-x-2">
-                                    <Badge className="bg-black text-white" content={profile.summonerLevel} color="default" placement="bottom-right" showOutline={false}>
-                                        <Avatar className="w-20 h-20 text-large" isBordered radius="sm" src={`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/profileicon/${profile.profileIconId}.png`} alt={profile.profileIconId.toString()} />
-                                    </Badge>
-                                    <div className="flex flex-col items-start">
-                                        <div><span className="font-extrabold">{account.gameName.toString()}</span>#{account.tagLine.toString()}</div>
-                                        <div className="flex flex-row text-sm text-default-500">
-                                            <div>마지막 게임: </div>
-                                            <TimeStampToTimeBefore timeStamp={profile.revisionDate} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-
-                        <Card className="w-[350px] dark:bg-zinc-900 dark:border-0">
-                            <CardHeader>
-                                <p className="text-md">솔로랭크</p>
-                            </CardHeader>
-                            <Divider />
-                            <CardBody>
-                                {soloRank ?
-                                    <div className="flex flex-row justify-between items-center">
-                                        <Image width={100} height={100} src={`/Rank=${getTierText(soloRank.tier)}.png`} />
-                                        <div>
-                                            <div className="text-xl font-bold">
-                                                {getTierText(soloRank.tier)}<span>{getTierNumberText(soloRank.rank)}</span>
-                                            </div>
-                                            <div className="text-sm text-default-500">{soloRank.leaguePoints}LP</div>
-                                        </div>
-                                        <div className="text-sm text-default-500">
-                                            <div>{soloRank.wins}승 {soloRank.losses}패</div>
-                                            <div>승률 {getWinRate(soloRank)}</div>
-                                        </div>
-                                    </div> : <div className="text-sm h-[100px] content-center">Unranked</div>}
-                            </CardBody>
-                        </Card>
-                        <Card className="w-[350px] dark:bg-zinc-900 dark:border-0">
-                            <CardHeader>
-                                <p className="text-md">자유랭크</p>
-                            </CardHeader>
-                            <Divider />
-                            <CardBody>
-                                {flexRank ?
-                                    <div className="flex flex-row justify-between items-center">
-                                        <Image width={100} height={100} src={`/Rank=${getTierText(flexRank.tier)}.png`} />
-                                        <div>
-                                            <div className="text-xl font-bold">
-                                                {getTierText(flexRank.tier)}<span>{getTierNumberText(flexRank.rank)}</span>
-                                            </div>
-                                            <div className="text-sm text-default-500">{flexRank.leaguePoints}LP</div>
-                                        </div>
-                                        <div className="text-sm text-default-500">
-                                            <div>{flexRank.wins}승 {flexRank.losses}패</div>
-                                            <div>승률 {getWinRate(flexRank)}</div>
-                                        </div>
-                                    </div> : <div className="text-sm h-[100px] content-center">Unranked</div>}
-                            </CardBody>
-                        </Card>
+                        <ProfileCard profile={profile} account={account}/>
+                        <RankCard rankName="솔로랭크" rank={soloRank}/>
+                        {/* <RankCard rankName="자유랭크" rank={flexRank}/> */}
                     </div>
 
                     {matchList ? <></> : <CircularProgress aria-label="Loading..." color="danger"/>}
@@ -555,7 +497,7 @@ export const MatchPageComponent = () => {
                                             setModalChampion(champion[participant.championName]);
                                             onOpen();
                                         } else {
-                                            alert('데이터 오류.');
+                                            errorChampion(res.status.status_code);
                                         }
                                     }}
                                     onClickPerk={(perks) => {

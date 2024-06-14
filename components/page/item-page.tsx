@@ -10,7 +10,10 @@ import { Item } from "@/types";
 import { 
     fetchItemList, 
  } from "@/data/api";
-
+ import { 
+	errorItemList, 
+  } from "@/data/apiError";
+ 
 /* NextUI */
 import { CheckboxGroup, Checkbox,
 	Tabs, Tab } from "@nextui-org/react";
@@ -84,7 +87,7 @@ export const ItemPageComponent = () => {
 			setArenaItemList(arenaItemList);
 			setArenaItemMap(arenaItemMap);
 		} else {
-			alert('데이터 오류.');
+			errorItemList(res.status.status_code);
 		}
 	}
 

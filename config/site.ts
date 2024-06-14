@@ -9,10 +9,6 @@ export const siteConfig = {
 		href: "/",
 	},
     {
-      label: "전적",
-      href: "/match",
-    },
-    {
       label: "아이템",
       href: "/item",
     },
@@ -25,10 +21,6 @@ export const siteConfig = {
 		{
 			label: "홈",
 			href: "/",
-		},
-		{
-		  label: "전적",
-		  href: "/match",
 		},
 		{
 			label: "아이템",

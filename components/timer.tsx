@@ -46,7 +46,6 @@ export const CompactGameDuration = ({gameDuration} : {gameDuration: number}) => 
 		<div>{minuteString}:{secondString}</div>
 	);
 };
-
 export const TimeStampToTimeBefore = ({timeStamp} : {timeStamp: number}) => {
 	var end = Math.floor(new Date(timeStamp).getTime() / 1000);
 	let now = Math.floor(Date.now() / 1000);

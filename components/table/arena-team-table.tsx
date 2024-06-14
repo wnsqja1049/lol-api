@@ -61,7 +61,7 @@ export const ArenaTeamTable = ({
     return (
         <Table color="primary" aria-label={"team table" + team.teamId}>
             <TableHeader>
-                <TableColumn width={300} align="center"><Chip size="sm" radius="sm">{getArenaRankText(team)}</Chip>({getArenaTeamName(team)})</TableColumn>
+                <TableColumn width={300} align="center"><Chip size="sm" radius="sm">{getArenaRankText(team)}</Chip> ({getArenaTeamName(team)})</TableColumn>
                 <TableColumn width={125}><div className="text-center">증강</div></TableColumn>
                 <TableColumn width={125}><div className="text-center">KDA</div></TableColumn>
                 <TableColumn width={100}><div className="text-center">피해량</div></TableColumn>

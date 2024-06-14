@@ -9,14 +9,18 @@ import {
 	fetchChampion,
 	fetchRotationList
  } from "@/data/api";
+ import {
+	errorChampion,
+	errorRotationList, 
+	errorChampionList, 
+ } from "@/data/apiError";
 
 /* Data Type */
 import { Champion, ChampionDetail } from "@/types";
 
 /* NextUI */
 import {
-	Input, Button, 
-	RadioGroup, Radio, 
+	Input, 
 	Modal, ModalContent, ModalProps, useDisclosure,
 	User,
 	Tabs, Tab
@@ -48,11 +52,7 @@ export const ChampionPageComponent = () => {
             var rotation = await res.data;
 			setRotationIdList(rotation.freeChampionIds);
         } else {
-            if(res.status.status_code === 403) {
-                alert('API 키가 만료되었습니다.');
-            } else {
-				alert('API 오류' + res.status.status_code)
-			}
+			errorRotationList(res.status.status_code);
         }
     }
 	const getChampionList = async () => {
@@ -99,7 +99,7 @@ export const ChampionPageComponent = () => {
 			setChampionList(championList);
 			setChampionMap(championMap);
 		} else {
-			alert('데이터 오류.');
+			errorChampionList(res.status.status_code);
 		}
 	}
 
@@ -161,7 +161,7 @@ export const RotationChampionList = ({ championMap, rotation }: { championMap: M
 									setModalChampion(champion[championName]);
 									onOpen();
 								} else {
-									alert('데이터 오류.');
+									errorChampion(res.status.status_code);
 								}
 							}}
 							name={championMap.get(id.toString())?.name}
@@ -268,7 +268,7 @@ export const AllChampionList = ({ champions }: { champions: Champion[] }) => {
 										setModalChampion(champion[championId]);
 										onOpen();
 									} else {
-										alert('데이터 오류.');
+										errorChampion(res.status.status_code);
 									}
 								}}
 								name={item.name}

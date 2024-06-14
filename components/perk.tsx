@@ -1,15 +1,10 @@
 "use client";
 
-/* React */
 /* Type */
 import { MatchParticipantPerks, Perk, StatMod } from "@/types";
-/* Data */
 
-/* NextUI */
-import { 
-    Tooltip,
-    Image, 
-} from "@nextui-org/react";
+/* Component */
+import { ModalMainPerkIcon, ModalSubPerkIcon, ModalStatPerkIcon } from "@/components/tooltip-icon"
 
 
 export const MainPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks | undefined, perkMap: Map<string, Perk> | undefined }) => {
@@ -220,83 +215,4 @@ export const StatPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks |
 		)
 	}
 	return (<></>);
-};
-
-export const ModalMainPerkIcon = ({ data, size, selectedId }: { data: Perk | undefined, size: number, selectedId: number }) => {
-
-	if(data === undefined) {
-		return (
-			<div className={`w-[${size}px] h-[${size}px] rounded-lg bg-zinc-300 dark:bg-zinc-900`}></div>
-		);
-	} else {
-		return (
-			<div className={selectedId === data.id ? "opacity-100" : "opacity-25"}>
-				<Tooltip
-					shouldCloseOnBlur
-					disableAnimation={false}
-					delay={0}
-					closeDelay={0} 
-					offset={15}
-					content={
-						<div>
-							<p>{data.name}</p>
-							<p className="text-sm" dangerouslySetInnerHTML={{ __html: data.longDesc }}></p>
-						</div>}>
-						<Image width={size} height={size} radius="sm" alt={data.key} src={`${process.env.NEXT_PUBLIC_DB_URL}/img/${data.icon}`} />
-				</Tooltip>
-			</div>
-		);
-	}
-};
-export const ModalSubPerkIcon = ({ data, size, firstId, secondId }: { data: Perk | undefined, size: number, firstId: number, secondId: number }) => {
-
-	if(data === undefined) {
-		return (
-			<div className={`w-[${size}px] h-[${size}px] rounded-lg bg-zinc-300 dark:bg-zinc-900`}></div>
-		);
-	} else {
-		return (
-			<div className={(firstId === data.id || secondId === data.id) ? "opacity-100" : "opacity-25"}>
-				<Tooltip
-					shouldCloseOnBlur
-					disableAnimation={false}
-					delay={0}
-					closeDelay={0} 
-					offset={15}
-					content={
-						<div>
-							<p>{data.name}</p>
-							<p className="text-sm" dangerouslySetInnerHTML={{ __html: data.longDesc }}></p>
-						</div>}>
-						<Image width={size} height={size} radius="sm" alt={data.key} src={`${process.env.NEXT_PUBLIC_DB_URL}/img/${data.icon}`} />
-				</Tooltip>
-			</div>
-		);
-	}
-};
-export const ModalStatPerkIcon = ({ data, size, selectedId }: { data: StatMod | undefined, size: number, selectedId: string }) => {
-
-	if(data === undefined) {
-		return (
-			<div className={`w-[${size}px] h-[${size}px] rounded-lg bg-zinc-300 dark:bg-zinc-900`}></div>
-		);
-	} else {
-		return (
-			<div className={selectedId === data.id ? "opacity-100" : "opacity-25"}>
-				<Tooltip
-					shouldCloseOnBlur
-					disableAnimation={false}
-					delay={0}
-					closeDelay={0} 
-					offset={15}
-					content={
-						<div>
-							<p>{data.title}</p>
-							<p className="text-sm">{data.desc}</p>
-						</div>}>
-						<Image width={size} height={size} radius="sm" alt={data.id.toString()} src={`${process.env.NEXT_PUBLIC_DB_URL}/img/${data.icon}`} />
-				</Tooltip>
-			</div>
-		);
-	}
 };

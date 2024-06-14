@@ -1,10 +1,4 @@
-import Error from "@/app/error";
-
-const config = {
-    apiKey: process.env.API_KEY,
-};
-
-
+/* Dragontail DB */
 export async function fetchItemList() {
 	console.log("fetchItemList");
 	const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/data/ko_KR/item.json`, {
@@ -53,7 +47,6 @@ export async function fetchSpellList() {
 		};
 	}
 }
-
 export async function fetchChampionList() {
     console.log("fetchChampionList");
     const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/data/ko_KR/champion.json`, {
@@ -102,6 +95,58 @@ export async function fetchChampion(name) {
 		};
 	}
 }
+export async function fetchPerkList() {
+    console.log("fetchPerkList");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/data/ko_KR/runesReforged.json`, {
+        cache: 'no-store'
+    });
+
+	if(res.status === 200) {
+		return {
+			status: {
+				status_code: res.status,
+				message: res.statusText,
+			},
+			data: res.json(),
+		};
+	} else {
+		return {
+			status: {
+				status_code:res.status,
+				message: res.statusText,
+			},
+			data: null,
+		};
+	}
+}
+
+/* CommunityDragon DB */
+export async function fetchAugmentList() {
+    console.log("fetchAugmentList");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ARENA_AUGMENTS_DB_URL}`, {
+        cache: 'no-store'
+    });
+
+	if(res.status === 200) {
+		return {
+			status: {
+				status_code: res.status,
+				message: res.statusText,
+			},
+			data: res.json(),
+		};
+	} else {
+		return {
+			status: {
+				status_code:res.status,
+				message: res.statusText,
+			},
+			data: null,
+		};
+	}
+}
+
+/* Riot Api */
 export async function fetchRotationList() {
 	console.log("fetchRotationList");
 	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/rotation`, {
@@ -126,7 +171,6 @@ export async function fetchRotationList() {
 		};
 	}
 }
-
 export async function fetchAccountByName(gameName, tagLine) {
 	console.log("fetchAccountByName");
 	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/account/name/${gameName}/${tagLine}`, {
@@ -223,55 +267,6 @@ export async function fetchMatch(matchId) {
 		};
 	}
 }
-export async function fetchPerkList() {
-    console.log("fetchPerkList");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/data/ko_KR/runesReforged.json`, {
-        cache: 'no-store'
-    });
-
-	if(res.status === 200) {
-		return {
-			status: {
-				status_code: res.status,
-				message: res.statusText,
-			},
-			data: res.json(),
-		};
-	} else {
-		return {
-			status: {
-				status_code:res.status,
-				message: res.statusText,
-			},
-			data: null,
-		};
-	}
-}
-export async function fetchAugmentList() {
-    console.log("fetchAugmentList");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_ARENA_AUGMENTS_DB_URL}`, {
-        cache: 'no-store'
-    });
-
-	if(res.status === 200) {
-		return {
-			status: {
-				status_code: res.status,
-				message: res.statusText,
-			},
-			data: res.json(),
-		};
-	} else {
-		return {
-			status: {
-				status_code:res.status,
-				message: res.statusText,
-			},
-			data: null,
-		};
-	}
-}
-
 export async function fetchRank(summonerId) {
 	console.log("fetchRank");
 	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/rank/${summonerId}`, {

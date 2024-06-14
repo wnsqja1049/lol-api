@@ -1,18 +1,5 @@
 import { MatchParticipant, Team, Match, Rank } from "@/types";
 
-
-// 전적 검색
-export function GetSearchHistoryList() {
-	var data = localStorage.getItem("searchUserList");
-	var nameList = [];
-
-	if(data != null) {
-		var nameList: any[] = JSON.parse(data);
-	}
-
-	return nameList;
-}
-
 // 검색 유저 관련
 export function getSearchUser(puuid: string, participants: MatchParticipant[]) {
 
@@ -59,8 +46,6 @@ export function isUserWin(puuid: string, match: Match) {
 		}
 	}
 }
-
-
 
 // 랭크 정보
 export const getTierText = (tier: string) => {
