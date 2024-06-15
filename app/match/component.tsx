@@ -178,11 +178,21 @@ export const MatchPageComponent = () => {
 
         getAccountAndProfile(name.gameName, name.tagLine);
 
-        
-        var newSummoners = summoners;
-        newSummoners.unshift({ gameName: name.gameName, tagLine: name.tagLine });
-        setSummoners(newSummoners);
-        localStorage.setItem('searchUserList', JSON.stringify(newSummoners));
+
+        var isSame = false;
+
+        for (let i = 0; i < summoners.length; i++) {
+            if (summoners[i].gameName == name.gameName && summoners[i].tagLine == name.tagLine) {
+                isSame = true;
+            }
+        }
+
+        if (!isSame) {
+            var newSummoners = summoners;
+            newSummoners.unshift({ gameName: name.gameName, tagLine: name.tagLine });
+            setSummoners(newSummoners);
+            localStorage.setItem('searchUserList', JSON.stringify(newSummoners));
+        }
     };
     const handleKeyDown = (e: any) => {
         if (e.key === 'Enter') {
@@ -232,6 +242,10 @@ export const MatchPageComponent = () => {
 
     const getAccountAndProfile = async (gameName: string, tagLine: string) => {
 
+        setAccount(undefined);
+        setProfile(undefined);
+        setMatchList([]);
+
         var accountResponse = await fetchAccountByName(gameName, tagLine);
 
         if (accountResponse.status.status_code === 200) {
@@ -242,6 +256,7 @@ export const MatchPageComponent = () => {
 
             if (profileResponse.status.status_code === 200) {
                 var profile: Profile = await profileResponse.data;
+                setProfile(profile);
 
                 var rankResponse = await fetchRank(profile.id);
 
@@ -263,7 +278,6 @@ export const MatchPageComponent = () => {
                 } else {
                     errorRank(rankResponse.status.status_code);
                 }
-                setProfile(profile);
 
                 getMatches(profile.puuid);
 

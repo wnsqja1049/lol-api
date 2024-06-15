@@ -26,7 +26,8 @@ import {
 } from "@nextui-org/react";
 
 /* Component */
-import { SpellIcon, ItemIcon, ChampionIcon, AugmentIcon } from "@/components/tooltip-icon"
+import { SpellIcon, ItemIcon, ChampionIcon, AugmentIcon } from "@/components/icon/tooltip-icon"
+import { DamageDealtProgressBar, DamageTakenProgressBar } from "@/components/progress-bar";
 
 export const ArenaTeamTable = ({ 
     puuid, 
@@ -110,12 +111,10 @@ export const ArenaTeamTable = ({
                         <TableCell className={(isUser(puuid, participant) ? userBgColor : bgColor) + "text-match-table text-center text-sm"}>
                             <div className="flex flex-row">
                                 <div className="w-[50px] text-center">
-                                    <p className="mb-1">{participant.totalDamageDealtToChampions}</p>
-                                    <Progress aria-label="Damage Dealt Progress" size="sm" radius="sm" color="danger" value={participant.totalDamageDealtToChampions} maxValue={largestDealtDamage} className="max-w-md bg-white" />
+                                    <DamageDealtProgressBar damage={participant.totalDamageDealtToChampions} largestDamage={largestDealtDamage}/>
                                 </div>
                                 <div className="w-[50px] ml-1 text-center">
-                                    <p className="mb-1">{participant.totalDamageTaken}</p>
-                                    <Progress aria-label="Damage Taken Progress" size="sm" radius="sm" color="default" value={participant.totalDamageTaken} maxValue={largestTakenDamage} className="max-w-md bg-white" />
+                                    <DamageTakenProgressBar damage={participant.totalDamageTaken} largestDamage={largestTakenDamage}/>
                                 </div>
                             </div>
                         </TableCell>

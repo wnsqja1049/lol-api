@@ -4,7 +4,7 @@
 import { MatchParticipantPerks, Perk, StatMod } from "@/types";
 
 /* Component */
-import { ModalMainPerkIcon, ModalSubPerkIcon, ModalStatPerkIcon } from "@/components/tooltip-icon"
+import { ModalMainPerkIcon, ModalSubPerkIcon, ModalStatPerkIcon } from "@/components/icon/tooltip-icon"
 
 
 export const MainPerkSet = ({ perks, perkMap }: { perks: MatchParticipantPerks | undefined, perkMap: Map<string, Perk> | undefined }) => {

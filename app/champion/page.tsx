@@ -1,5 +1,5 @@
 /* Component */
-import { ChampionPageComponent } from "@/components/page/champion-page";
+import { ChampionPageComponent } from "./component";
 
 export default async function ChampionPage() {
 

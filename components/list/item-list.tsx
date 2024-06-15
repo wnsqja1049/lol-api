@@ -8,7 +8,7 @@ import {
 	CheckboxGroup, Checkbox
 } from "@nextui-org/react";
 /* Component */
-import { ItemIcon } from "@/components/tooltip-icon"
+import { ItemIcon } from "@/components/icon/tooltip-icon"
 
 
 

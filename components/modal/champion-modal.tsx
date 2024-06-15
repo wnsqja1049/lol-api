@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 /* NextUI */
 import {
 	Button,
-	Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalProps, useDisclosure,
+	ModalHeader, ModalBody, ModalFooter, ModalProps, useDisclosure,
 	Badge, Avatar,
 	Pagination,
 	Image,

@@ -1,7 +1,8 @@
 /* Component */
 import { title } from "@/components/primitives";
-import { MatchPageComponent } from "@/components/page/match-page";
+//import { MatchPageComponent } from "@/components/page/match-page";
 import { Suspense } from "react";
+import { MatchPageComponent } from "./component";
 
 export default async function MatchPage() {
 

@@ -7,7 +7,7 @@ import {
 	NavbarItem,
 	NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { Avatar, Link, Button } from "@nextui-org/react";
+import { Avatar, Link } from "@nextui-org/react";
 
 import { link as linkStyles } from "@nextui-org/theme";
 
@@ -20,7 +20,7 @@ import {
 	TwitterIcon,
 	GithubIcon,
 	DiscordIcon,
-} from "@/components/icons";
+} from "@/components/icon/icons";
 
 export const Navbar = () => {
 

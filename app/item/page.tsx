@@ -1,6 +1,6 @@
 /* Component */
 import { title } from "@/components/primitives";
-import { ItemPageComponent } from "@/components/page/item-page";
+import { ItemPageComponent } from "./component";
 
 export default async function ItemPage() {
 	return (

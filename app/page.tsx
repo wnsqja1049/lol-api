@@ -1,5 +1,5 @@
 /* Component */
-import { MainPageComponent } from "@/components/page/main-page";
+import { MainPageComponent } from "./component";
 import { Suspense } from "react";
 
 /* NextUI */

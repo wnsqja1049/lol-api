@@ -33,11 +33,12 @@ import {
 } from "@nextui-org/react";
 
 /* Component */
-import { PerkIcon, SpellIcon, ItemIcon, ChampionIcon, SmallChampionIcon, AugmentIcon } from "@/components/tooltip-icon"
+import { PerkIcon, SpellIcon, ItemIcon, ChampionIcon, SmallChampionIcon, AugmentIcon } from "@/components/icon/tooltip-icon"
 import { CompactGameDuration, TimeStampToTimeBefore } from "@/components/timer"
 import { TeamTable } from "@/components/table/team-table"
 import { ArenaTeamTable } from "@/components/table/arena-team-table"
-import { ChevronIcon } from "@/components/icons"
+import { ChevronIcon } from "@/components/icon/icons"
+import { nanoid } from 'nanoid';
 
 
 export const MatchListItem = ({
@@ -177,7 +178,7 @@ export const MatchListItem = ({
                                         {championMap ?
                                             <div>
                                                 {match.info.teams.map((team) => (
-                                                    <div key={team.teamId} className="flex flex-row">
+                                                    <div key={nanoid()} className="flex flex-row">
                                                         {team.participants.map((participant) => (
                                                             <div key={participant.puuid} className="flex flex-row">
                                                                 <SmallChampionIcon
@@ -274,7 +275,7 @@ export const MatchListItem = ({
                                         {championMap ?
                                             <div className="flex flex-row">
                                                 {match.info.teams.map((team) => (
-                                                    <div key={team.teamId} className="flex flex-col">
+                                                    <div key={nanoid()} className="flex flex-col">
                                                         {team.participants.map((participant) => (
                                                             <div key={participant.puuid} className="flex flex-row">
                                                                 <SmallChampionIcon
@@ -302,7 +303,7 @@ export const MatchListItem = ({
                         {isOpen ? isArena(match) ? 
                         match.info.teams.map((team) => (
                             <ArenaTeamTable
-                                key={team.playerSubteamId}
+                                key={nanoid()}
                                 puuid={searchedUser.puuid}
                                 team={team}
                                 championMap={championMap}
@@ -315,7 +316,7 @@ export const MatchListItem = ({
                         )) : 
                         match.info.teams.map((team) => (
                             <TeamTable
-                                key={match.metadata.matchId}
+                                key={nanoid()}
                                 puuid={searchedUser.puuid}
                                 team={team}
                                 championMap={championMap}
