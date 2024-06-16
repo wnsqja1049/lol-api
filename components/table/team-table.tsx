@@ -73,7 +73,7 @@ export const TeamTable = ({
     var userBgColor = team.win ? bgUserBlue : bgUserRed;
 
     return (
-        <Table color="primary" aria-label={"team table" + team.teamId}>
+        <Table className="w-[950px]" color="primary" aria-label={"team table" + team.teamId}>
             <TableHeader>
                 <TableColumn width={300} align="center"><Chip size="sm" radius="sm">{team.win ? "승리" : "패배"}</Chip> ({team.teamId === 100 ? "블루" : "레드"}팀)</TableColumn>
                 <TableColumn width={125}><div className="text-center">KDA</div></TableColumn>

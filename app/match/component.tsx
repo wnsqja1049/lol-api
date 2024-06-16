@@ -85,8 +85,9 @@ export const MatchPageComponent = () => {
     const [flexRank, setFlexRank] = useState<Rank>();
     const [arenaRank, setArenaRank] = useState<Rank>();
 
-    const [matchIdList, setMatchIdList] = useState<string[]>();
-    const [matchList, setMatchList] = useState<Match[]>();
+    const [matchIdList, setMatchIdList] = useState<string[]>([]);
+    const [matchList, setMatchList] = useState<Match[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [championMap, setChampionMap] = useState<Map<string, Champion>>();
     const [itemMap, setItemMap] = useState<Map<string, Item>>();
@@ -242,6 +243,8 @@ export const MatchPageComponent = () => {
 
     const getAccountAndProfile = async (gameName: string, tagLine: string) => {
 
+        setIsLoading(true);
+
         setAccount(undefined);
         setProfile(undefined);
         setMatchList([]);
@@ -297,6 +300,7 @@ export const MatchPageComponent = () => {
         var res = await fetchMatches(puuid);
 
         if (res.status.status_code === 200) {
+
             var matchIdList = await res.data;
             var matchList:Match[] = [];
 
@@ -308,7 +312,8 @@ export const MatchPageComponent = () => {
                 matchList.push(match);
             }
             setMatchList(matchList);
-
+            
+            setIsLoading(false);
         } else {
             errorMatches(res.status.status_code);
         }
@@ -472,7 +477,6 @@ export const MatchPageComponent = () => {
                     onKeyDown={handleKeyDown}/>
                 <Button className="h-[56px]" color="primary" onPress={() => search(value)}>검색</Button>
             </div>
-
             <SearchList
                 summoners={summoners}
                 handleClickRecommand={(name) => handleClickRecommand(name)}
@@ -487,7 +491,12 @@ export const MatchPageComponent = () => {
                         {/* <RankCard rankName="자유랭크" rank={flexRank}/> */}
                     </div>
 
-                    {matchList ? <></> : <CircularProgress aria-label="Loading..." color="danger"/>}
+
+                    
+                    {isLoading ? 
+                    <div className="flex flex items-center justify-center py-10">
+                        <CircularProgress aria-label="Loading..." color="danger" />
+                    </div> : <></>}
 
                     <div className="w-full flex flex-col gap-2">
                         {matchList ? matchList.map((match: Match) => {

@@ -7,6 +7,7 @@ import { Augment, Perk, Spell, Item, Champion, MatchParticipant, StatMod } from 
 
 /* NextUI */
 import { 
+	Card,  
     Tooltip,
     Image, 
 	Badge, Avatar, 
@@ -90,7 +91,7 @@ export const ItemIcon = ({ data, size, radius }: { data: Item | undefined, size:
 
 	if(data === undefined) {
 		return (
-			<div className={`w-[${size}px] h-[${size}px] rounded-lg bg-zinc-300 dark:bg-zinc-900`}></div>
+			<Card className={`w-[${size}px] h-[${size}px] rounded-lg bg-zinc-300 dark:bg-zinc-900`}><div className="space-x-3"></div></Card>
 		);
 	} else {
 		return (

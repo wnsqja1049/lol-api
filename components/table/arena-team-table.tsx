@@ -38,7 +38,8 @@ export const ArenaTeamTable = ({
     augmentMap, 
     largestDealtDamage, 
     largestTakenDamage, 
-    onClickChampion }: {
+    onClickChampion,
+    onClickParticipant, }: {
     puuid: string, 
     team: Team,
     championMap: Map<string, Champion> | undefined,
@@ -47,7 +48,8 @@ export const ArenaTeamTable = ({
     augmentMap: Map<string, Augment> | undefined,
     largestDealtDamage: number, 
     largestTakenDamage: number, 
-    onClickChampion: (participant: MatchParticipant) => void
+    onClickChampion: (participant: MatchParticipant) => void,
+    onClickParticipant: (participant: MatchParticipant) => void,
 }) => {
     var players = team.participants;
 
@@ -60,7 +62,7 @@ export const ArenaTeamTable = ({
     var userBgColor = team.win ? bgUserBlue : bgUserRed;
 
     return (
-        <Table color="primary" aria-label={"team table" + team.teamId}>
+        <Table className="w-[950px]" color="primary" aria-label={"team table" + team.teamId}>
             <TableHeader>
                 <TableColumn width={300} align="center"><Chip size="sm" radius="sm">{getArenaRankText(team)}</Chip> ({getArenaTeamName(team)})</TableColumn>
                 <TableColumn width={125}><div className="text-center">증강</div></TableColumn>
@@ -87,7 +89,7 @@ export const ArenaTeamTable = ({
                                     <SpellIcon size={20} data={spellMap.get(participant.summoner1Id.toString())} />
                                     <SpellIcon size={20} data={spellMap.get(participant.summoner2Id.toString())} />
                                 </div> : <></>}
-                                {participant.riotIdGameName}#{participant.riotIdTagline}
+                                <div className="cursor-pointer hover:underline" onClick={() => { onClickParticipant(participant) }}>{participant.riotIdGameName}#{participant.riotIdTagline}</div>
                             </div>
                         </TableCell>
                         {/* 증강 */}

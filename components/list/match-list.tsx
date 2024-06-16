@@ -98,7 +98,7 @@ export const MatchListItem = ({
     }
 
     return (
-        <>
+        <div>
             {match ? 
             <>
                 {searchedUser ?
@@ -106,7 +106,7 @@ export const MatchListItem = ({
                 {championMap ? 
                     <>
                         {isArena(match) ? 
-                        <Table className={"rounded-l-lg border-l-8 " + borderColor} removeWrapper hideHeader color="primary" aria-label={"team table " + match.metadata.matchId}>
+                        <Table className={"w-[950px] rounded-l-lg border-l-8 " + borderColor} removeWrapper hideHeader color="primary" aria-label={"team table " + match.metadata.matchId}>
                             <TableHeader>
                                 <TableColumn> </TableColumn>
                                 <TableColumn> </TableColumn>
@@ -116,7 +116,7 @@ export const MatchListItem = ({
                             <TableBody emptyContent={"데이터가 없습니다."}>
                                 <TableRow>
                                     {/* 게임정보 */}
-                                    <TableCell className={bgColor + "w-[120px] text-match-table"}>
+                                    <TableCell className={bgColor + "pl-10 w-[150px] text-match-table"}>
                                         <div className={textColor + "font-bold"}>{getGameType(match.info.queueId)}</div>
                                         <TimeStampToTimeBefore timeStamp={match.info.gameEndTimestamp!} />
                                         <div className="flex flex-row gap-1">
@@ -125,7 +125,7 @@ export const MatchListItem = ({
                                         </div>
                                     </TableCell>
                                     {/* 소환사 */}
-                                    <TableCell className={bgColor + "w-[250px] text-match-table"}>
+                                    <TableCell className={bgColor + "w-[300px] text-match-table"}>
                                         <div className="flex flex-col">
                                             <div className="flex flex-row itemList-center pl-1">
                                                 {championMap ? <ChampionIcon
@@ -163,22 +163,23 @@ export const MatchListItem = ({
                                                 </div>
                                             </div>
                                             {itemMap ?
-                                                <div className="flex flex-row mt-3">
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item0.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item1.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item2.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item3.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item4.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item5.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item6.toString())} size={25} radius={true} />}
-                                                </div> : <></>}
+                                            <div className="flex flex-row mt-3">
+                                                {<ItemIcon data={itemMap.get(searchedUser.item0.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item1.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item2.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item3.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item4.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item5.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item6.toString())} size={30} radius={true} />}
+                                            </div> : <></>}
                                         </div>
                                     </TableCell>
-                                    <TableCell className={bgColor + "w-[300px] text-match-table text-center text-sm"}>
+                                    {/* 플레이어 */}
+                                    <TableCell className={bgColor + "w-[350px] text-match-table text-center text-sm"}>
                                         {championMap ?
                                             <div>
                                                 {match.info.teams.map((team) => (
-                                                    <div key={nanoid()} className="flex flex-row">
+                                                    <div key={nanoid()} className="flex flex-row gap-5">
                                                         {team.participants.map((participant) => (
                                                             <div key={participant.puuid} className="flex flex-row">
                                                                 <SmallChampionIcon
@@ -195,13 +196,14 @@ export const MatchListItem = ({
                                                 ))}
                                             </div> : <></>}
                                     </TableCell>
+                                    {/* 버튼 */}
                                     <TableCell className={bgColor + "text-right text-match-table rounded-r-lg"} align="right">
                                         <Button className={bgUserColor + "h-[160px] w-[10px]"} onClick={()=>{setIsOpen(!isOpen)}}><div className={isOpen ? "" : "rotate-180"}><ChevronIcon className="rotate-90"/></div></Button>
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table> : 
-                        <Table className={"rounded-l-lg border-l-8 " + borderColor} removeWrapper hideHeader color="primary" aria-label={"team table " + match.metadata.matchId}>
+                        <Table className={"w-[950px] rounded-l-lg border-l-8 " + borderColor} removeWrapper hideHeader color="primary" aria-label={"team table " + match.metadata.matchId}>
                             <TableHeader>
                                 <TableColumn> </TableColumn>
                                 <TableColumn> </TableColumn>
@@ -211,7 +213,7 @@ export const MatchListItem = ({
                             <TableBody emptyContent={"데이터가 없습니다."}>
                                 <TableRow>
                                     {/* 게임정보 */}
-                                    <TableCell className={bgColor + "w-[120px] text-match-table"}>
+                                    <TableCell className={bgColor + "pl-10 w-[150px] text-match-table"}>
                                         <div className={textColor + "font-bold"}>{getGameType(match.info.queueId)}</div>
                                         <TimeStampToTimeBefore timeStamp={match.info.gameEndTimestamp} />
                                         <div className="flex flex-row gap-1">
@@ -220,7 +222,7 @@ export const MatchListItem = ({
                                         </div>
                                     </TableCell>
                                     {/* 소환사 */}
-                                    <TableCell className={bgColor + "w-[250px] text-match-table"}>
+                                    <TableCell className={bgColor + "w-[300px] text-match-table"}>
                                         <div className="flex flex-col">
                                             <div className="flex flex-row itemList-center pl-1">
                                                 {championMap ? <ChampionIcon
@@ -260,20 +262,21 @@ export const MatchListItem = ({
                                                 </div>
                                             </div>
                                             {itemMap ?
-                                                <div className="flex flex-row mt-3">
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item0.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item1.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item2.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item3.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item4.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item5.toString())} size={25} radius={true} />}
-                                                    {<ItemIcon data={itemMap.get(searchedUser.item6.toString())} size={25} radius={true} />}
-                                                </div> : <></>}
+                                            <div className="flex flex-row mt-3">
+                                                {<ItemIcon data={itemMap.get(searchedUser.item0.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item1.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item2.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item3.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item4.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item5.toString())} size={30} radius={true} />}
+                                                {<ItemIcon data={itemMap.get(searchedUser.item6.toString())} size={30} radius={true} />}
+                                            </div> : <></>}
                                         </div>
                                     </TableCell>
-                                    <TableCell className={bgColor + "w-[300px] text-match-table text-center text-sm"}>
+                                    {/* 플레이어 */}
+                                    <TableCell className={bgColor + "w-[350px] text-match-table text-center text-sm"}>
                                         {championMap ?
-                                            <div className="flex flex-row">
+                                            <div className="flex flex-row gap-5">
                                                 {match.info.teams.map((team) => (
                                                     <div key={nanoid()} className="flex flex-col">
                                                         {team.participants.map((participant) => (
@@ -292,6 +295,7 @@ export const MatchListItem = ({
                                                 ))}
                                             </div> : <></>}
                                     </TableCell>
+                                    {/* 버튼 */}
                                     <TableCell className={bgColor + "text-right text-match-table rounded-r-lg"} align="right">
                                         <Button className={bgUserColor + "h-[100px] w-[10px]"} onClick={()=>{setIsOpen(!isOpen)}}><div className={isOpen ? "" : "rotate-180"}><ChevronIcon className="rotate-90"/></div></Button>
                                     </TableCell>
@@ -312,7 +316,8 @@ export const MatchListItem = ({
                                 augmentMap={augmentMap}
                                 largestDealtDamage={getLargestDealtDamage(match)}
                                 largestTakenDamage={getLargestTakenDamage(match)}
-                                onClickChampion={onClickChampion} />
+                                onClickChampion={onClickChampion}
+                                onClickParticipant={(participant) => {onClickParticipant(participant)}}/>
                         )) : 
                         match.info.teams.map((team) => (
                             <TeamTable
@@ -327,12 +332,11 @@ export const MatchListItem = ({
                                 largestTakenDamage={getLargestTakenDamage(match)}
                                 onClickChampion={onClickChampion}
                                 onClickPerk={(perks) => {onClickPerk}}
-                                onClickParticipant={(participant) => {onClickParticipant(participant)}}
-                            />
+                                onClickParticipant={(participant) => {onClickParticipant(participant)}}/>
                         )) : <></>}
                     </>
                 </> : <></>}
             </> : <></>}
-        </>
+        </div>
     );
 }
