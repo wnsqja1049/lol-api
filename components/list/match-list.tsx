@@ -331,7 +331,7 @@ export const MatchListItem = ({
                                 largestDealtDamage={getLargestDealtDamage(match)}
                                 largestTakenDamage={getLargestTakenDamage(match)}
                                 onClickChampion={onClickChampion}
-                                onClickPerk={(perks) => {onClickPerk}}
+                                onClickPerk={(perks) => {onClickPerk(perks)}}
                                 onClickParticipant={(participant) => {onClickParticipant(participant)}}/>
                         )) : <></>}
                     </>

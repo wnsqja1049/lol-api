@@ -33,7 +33,7 @@ export const ChampionModal = ({ onClose, modalChampion }: { onClose: () => void,
 			<>
 				<ModalHeader className="flex flex-row text-xl items-center gap-1">{modalChampion.name}<span className="text-sm ml-2 font-normal">{modalChampion.title}</span></ModalHeader>
 				<ModalBody>
-					<div className="flex flex-row border-2 gap-2 p-2 rounded-lg">
+					<div className="flex flex-row border-2 border-zinc-300 dark:border-zinc-500 gap-2 p-2 rounded-lg">
 						<Image
 							className="w-full"
 							src={`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/champion/${modalChampion.id}.png`}
@@ -45,7 +45,7 @@ export const ChampionModal = ({ onClose, modalChampion }: { onClose: () => void,
 	
 					<div className="text-xl font-bold">스킬</div>
 
-					<div className="flex flex-col gap-5 p-2 border-2 rounded-lg">
+					<div className="flex flex-col gap-5 p-2 border-2 border-zinc-300 dark:border-zinc-500 rounded-lg">
 						{/* 패시브 */}
 						<div>
 							<div className="flex flex-row gap-2 px-2 py-2 items-center">
@@ -146,7 +146,9 @@ export const ChampionModal = ({ onClose, modalChampion }: { onClose: () => void,
 					
 
 					<div className="text-xl font-bold">스텟</div>
-					{ChampionStatTable(modalChampion!)}
+					<div className="border-2 border-zinc-300 dark:border-zinc-500 rounded-lg">
+						{ChampionStatTable(modalChampion!)}
+					</div>
 	
 					<div className="text-xl font-bold">스킨</div>
 					{/* 메인 이미지 */}

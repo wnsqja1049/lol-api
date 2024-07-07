@@ -13,7 +13,7 @@ import {
 
 export const ChampionStatTable = (detailData: ChampionDetail) => {
 	return (
-		<div className="p-2 border-2 rounded-lg">
+		<div className="p-2">
 			<Table hideHeader isCompact removeWrapper aria-label="champion stat table">
 				<TableHeader>
 					<TableColumn>능력치(성장능력치)</TableColumn>

@@ -1,51 +1,12 @@
-# Next.js & NextUI Template
+# Garen.gg
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+Riot API를 이용한 League of Legends 게임의 전적검색 사이트입니다.
+<br>
+최근 게임 전적, 유저 검색 기능과 아이템, 챔피언, 스킬등의 데이터를 제공합니다.
+<br>
+PERSONAL API KEY를 발급받아 사용하였으며 시간당 Request 횟수가 제한되어 있습니다.
 
-## Technologies Used
-
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
-
-## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+- Next.js 14
+- NextUI
+- Tailwind CSS
+- TypeScript

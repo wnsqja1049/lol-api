@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: "Next.js + NextUI",
-	description: "Make beautiful websites regardless of your design experience.",
+	name: "Garen.gg",
+	description: "리그 오브 레전드 게임의 전적 검색 서비스를 제공합니다.",
 	navItems: [
 	{
 		label: "홈",
