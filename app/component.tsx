@@ -5,6 +5,7 @@ import { useState, useEffect, useMemo } from "react";
 
 /* Type */
 import {
+    Account,
     UserName,
 } from "@/types";
 
@@ -26,11 +27,10 @@ export const MainPageComponent = () => {
         if (value === "") return false;
 
     }, [value]);
-
+    
     useEffect(() => {
         var data = localStorage.getItem("searchUserList");
         var nameList: any[] = [];
-
 		if(data != null) {
 			nameList = JSON.parse(data);
 		}
@@ -97,6 +97,8 @@ export const MainPageComponent = () => {
         }
         return;
     };
+
+
 
     return (
         <>

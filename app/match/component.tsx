@@ -69,6 +69,12 @@ import { SearchList } from "@/components/list/search-list"
 import { MatchListItem } from "@/components/list/match-list"
 import { ProfileCard, RankCard } from "@/components/card"
 
+/* Redux */
+import { useDispatch, useSelector } from 'react-redux';
+import { initAccount, setAccount } from '@/app/lib/redux/slice/account'
+import { initProfile, setProfile } from '@/app/lib/redux/slice/profile'
+
+
 export const MatchPageComponent = () => {
 
     const pathname = usePathname()
@@ -77,9 +83,6 @@ export const MatchPageComponent = () => {
 
     const [summoners, setSummoners] = useState<UserName[]>([]);
     const [value, setValue] = useState("");
-
-    const [account, setAccount] = useState<Account>();
-    const [profile, setProfile] = useState<Profile>();
 
     const [soloRank, setSoloRank] = useState<Rank>();
     const [flexRank, setFlexRank] = useState<Rank>();
@@ -101,6 +104,10 @@ export const MatchPageComponent = () => {
 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = useState<ModalProps["scrollBehavior"]>("inside");
+
+    const dispatch = useDispatch();
+    const account = useSelector((state: {account: Account}) => state.account);
+    const profile = useSelector((state: {profile: Profile}) => state.profile);
 
     const isInvalid = useMemo(() => {
 
@@ -128,8 +135,8 @@ export const MatchPageComponent = () => {
         var gameName = searchParams.get("gameName");
         var tagLine = searchParams.get("tagLine");
 
-        if(!account) {
-            if(!profile) {
+        if(!account.puuid) {
+            if(!profile.puuid) {
                 if(gameName && tagLine) {
                     getAccountAndProfile(gameName, tagLine);
                     setValue(gameName + '#' + tagLine);
@@ -245,21 +252,22 @@ export const MatchPageComponent = () => {
 
         setIsLoading(true);
 
-        setAccount(undefined);
-        setProfile(undefined);
+        dispatch(initAccount());
+        dispatch(initProfile());
+
         setMatchList([]);
 
         var accountResponse = await fetchAccountByName(gameName, tagLine);
 
         if (accountResponse.status.status_code === 200) {
             var account = await accountResponse.data;
-            setAccount(account);
-
+            dispatch(setAccount(account));
+            
             var profileResponse = await fetchProfile(account.puuid);
 
             if (profileResponse.status.status_code === 200) {
                 var profile: Profile = await profileResponse.data;
-                setProfile(profile);
+                dispatch(setProfile(profile));
 
                 var rankResponse = await fetchRank(profile.id);
 
@@ -477,21 +485,22 @@ export const MatchPageComponent = () => {
                     onKeyDown={handleKeyDown}/>
                 <Button className="h-[56px]" color="primary" onPress={() => search(value)}>검색</Button>
             </div>
+            {account.puuid}
+            {account.gameName}
+            {account.tagLine}
             <SearchList
                 summoners={summoners}
                 handleClickRecommand={(name) => handleClickRecommand(name)}
                 handleClickHistory={(name) => handleClickHistory(name)}
                 handleClose={(name) => handleDeleteHistory(name)} />
 
-            {account && profile ?
+            {account.puuid && profile.puuid ?
                 <div>
                     <div className="flex flex-wrap gap-2 mb-5">
                         <ProfileCard profile={profile} account={account}/>
                         <RankCard rankName="솔로랭크" rank={soloRank}/>
                         {/* <RankCard rankName="자유랭크" rank={flexRank}/> */}
                     </div>
-
-
                     
                     {isLoading ? 
                     <div className="flex flex items-center justify-center py-10">
