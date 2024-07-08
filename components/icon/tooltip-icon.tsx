@@ -109,7 +109,7 @@ export const ItemIcon = ({ data, size, radius }: { data: Item | undefined, size:
 						<p dangerouslySetInnerHTML={{ __html: data.description }}></p>
 						<p>가격: {data.gold.total}({data.gold.base})</p>
 					</div>}>
-					<Image width={size} height={size} radius={radius ? 'md' : 'none'} src={`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/item/${data.image.full}`} alt={data.id.toString()} placeholder="blur" />
+					<Image width={size} height={size} radius={radius ? 'md' : 'none'} src={`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/item/${data.image.full}`} alt={data.id.toString()} />
 			</Tooltip>
 		);
 	}
