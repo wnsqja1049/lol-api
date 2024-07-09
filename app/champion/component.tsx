@@ -30,6 +30,10 @@ import {
 import { ChampionModal } from "@/components/modal/champion-modal"
 import { title } from "@/components/primitives";
 
+/* Redux */
+import { useDispatch, useSelector } from 'react-redux';
+import { modalChampionSelector, initModalChampion, setModalChampion } from '@/app/lib/redux/slice/modalChampion'
+
 export const ChampionPageComponent = () => {
 
 	const [ rotationIdList, setRotationIdList ] = useState<number[]>([]);
@@ -125,7 +129,8 @@ export const ChampionPageComponent = () => {
 
 export const RotationChampionList = ({ championMap, rotation }: { championMap: Map<string, Champion>, rotation: number[]}) => {
 
-	const [modalChampion, setModalChampion] = useState<ChampionDetail>();
+    const dispatch = useDispatch();
+    const modalChampion = useSelector(modalChampionSelector);
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const [scrollBehavior, setScrollBehavior] = useState<ModalProps["scrollBehavior"]>("inside");
 
@@ -140,7 +145,7 @@ export const RotationChampionList = ({ championMap, rotation }: { championMap: M
 				<ModalContent>
 					{(onClose) => (
                 		modalChampion && 
-						<ChampionModal onClose={onClose} modalChampion={modalChampion}/>
+						<ChampionModal onClose={onClose}/>
 					)}
 				</ModalContent>
 			</Modal>
@@ -158,7 +163,7 @@ export const RotationChampionList = ({ championMap, rotation }: { championMap: M
 								if(res.status.status_code === 200) {
 									var data = await res.data;
 									var champion = data.data;
-									setModalChampion(champion[championName]);
+									dispatch(setModalChampion(champion[championName]));
 									onOpen();
 								} else {
 									errorChampion(res.status.status_code);
@@ -176,19 +181,19 @@ export const RotationChampionList = ({ championMap, rotation }: { championMap: M
 
 export const AllChampionList = ({ champions }: { champions: Champion[] }) => {
 
-
 	const [searchValue, setSearchValue] = useState("");
 	const [selected, setSelected] = useState("");
 
-	const [modalChampion, setModalChampion] = useState<ChampionDetail>();
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const [scrollBehavior, setScrollBehavior] = useState<ModalProps["scrollBehavior"]>("inside");
+
+    const dispatch = useDispatch();
+    const modalChampion = useSelector(modalChampionSelector);
 
 	const Hangul = require('hangul-js');
 
 	return (
 		<>
-				
 			<Modal size="4xl"
 				isOpen={isOpen}
 				onOpenChange={onOpenChange}
@@ -196,7 +201,7 @@ export const AllChampionList = ({ champions }: { champions: Champion[] }) => {
 				<ModalContent>
 					{(onClose) => (
 						modalChampion && 
-						<ChampionModal onClose={onClose} modalChampion={modalChampion}/>
+						<ChampionModal onClose={onClose}/>
 					)}
 				</ModalContent>
 			</Modal>
@@ -265,7 +270,7 @@ export const AllChampionList = ({ champions }: { champions: Champion[] }) => {
 									if (res.status.status_code === 200) {
 										var data = await res.data;
 										var champion = data.data;
-										setModalChampion(champion[championId]);
+										dispatch(setModalChampion(champion[championId]));
 										onOpen();
 									} else {
 										errorChampion(res.status.status_code);

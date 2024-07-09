@@ -2,6 +2,8 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
+import { Account } from "@/types";
+
 const initialState = {
     puuid: '',
     gameName: '',
@@ -24,5 +26,7 @@ export const accountSlice = createSlice({
 });
 
 export const { initAccount, setAccount } = accountSlice.actions;
+
+export const accountSelector = ((state: {account: Account}) => state.account);
 
 export default accountSlice.reducer;

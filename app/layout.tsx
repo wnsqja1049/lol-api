@@ -5,7 +5,7 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import clsx from "clsx";
-import { ReduxProvider } from './reduxProvider'
+import { ReduxProvider } from '@/app/lib/redux/reduxProvider'
 
 export const metadata: Metadata = {
 	title: {

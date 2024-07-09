@@ -71,8 +71,9 @@ import { ProfileCard, RankCard } from "@/components/card"
 
 /* Redux */
 import { useDispatch, useSelector } from 'react-redux';
-import { initAccount, setAccount } from '@/app/lib/redux/slice/account'
-import { initProfile, setProfile } from '@/app/lib/redux/slice/profile'
+import { accountSelector, initAccount, setAccount } from '@/app/lib/redux/slice/account'
+import { profileSelector, initProfile, setProfile } from '@/app/lib/redux/slice/profile'
+import { setModalChampion } from '@/app/lib/redux/slice/modalChampion'
 
 
 export const MatchPageComponent = () => {
@@ -88,7 +89,6 @@ export const MatchPageComponent = () => {
     const [flexRank, setFlexRank] = useState<Rank>();
     const [arenaRank, setArenaRank] = useState<Rank>();
 
-    const [matchIdList, setMatchIdList] = useState<string[]>([]);
     const [matchList, setMatchList] = useState<Match[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -99,15 +99,14 @@ export const MatchPageComponent = () => {
     const [augmentMap, setAugmentMap] = useState<Map<string, Augment>>();
 
     const [modalContent, setModalContent] = useState<String>();
-    const [modalChampion, setModalChampion] = useState<ChampionDetail>();
     const [modalPerks, setModalPerks] = useState<MatchParticipantPerks>();
 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = useState<ModalProps["scrollBehavior"]>("inside");
 
     const dispatch = useDispatch();
-    const account = useSelector((state: {account: Account}) => state.account);
-    const profile = useSelector((state: {profile: Profile}) => state.profile);
+    const account = useSelector(accountSelector);
+    const profile = useSelector(profileSelector);
 
     const isInvalid = useMemo(() => {
 
@@ -312,13 +311,14 @@ export const MatchPageComponent = () => {
             var matchIdList = await res.data;
             var matchList:Match[] = [];
 
-            setMatchIdList(matchIdList);
-
-            for(let i = 0; i < matchIdList.length; i++) {
-                var match:Match = await getNewMatch(matchIdList[i]);
-                setTeams(match);
-                matchList.push(match);
-            }
+            await Promise.all(
+                matchIdList.map(async (matchId: string) => {
+                    var match:Match = await getNewMatch(matchId);
+                    setTeams(match);
+                    matchList.push(match);
+                })
+            )
+            
             setMatchList(matchList);
             
             setIsLoading(false);
@@ -465,7 +465,7 @@ export const MatchPageComponent = () => {
                     {(onClose) => (
                         <>
                             {modalContent === "Champion" ?
-                                <ChampionModal onClose={onClose} modalChampion={modalChampion} /> :
+                                <ChampionModal onClose={onClose}/> :
                                 <PerkModal onClose={onClose} perks={modalPerks} perkMap={perkMap}/>
                             }
                         </>
@@ -485,9 +485,6 @@ export const MatchPageComponent = () => {
                     onKeyDown={handleKeyDown}/>
                 <Button className="h-[56px]" color="primary" onPress={() => search(value)}>검색</Button>
             </div>
-            {account.puuid}
-            {account.gameName}
-            {account.tagLine}
             <SearchList
                 summoners={summoners}
                 handleClickRecommand={(name) => handleClickRecommand(name)}
@@ -497,7 +494,7 @@ export const MatchPageComponent = () => {
             {account.puuid && profile.puuid ?
                 <div>
                     <div className="flex flex-wrap gap-2 mb-5">
-                        <ProfileCard profile={profile} account={account}/>
+                        <ProfileCard/>
                         <RankCard rankName="솔로랭크" rank={soloRank}/>
                         {/* <RankCard rankName="자유랭크" rank={flexRank}/> */}
                     </div>
@@ -526,7 +523,7 @@ export const MatchPageComponent = () => {
                                             var data = await res.data;
                                             var champion = data.data;
                                             setModalContent("Champion");
-                                            setModalChampion(champion[participant.championName]);
+                                            dispatch(setModalChampion(champion[participant.championName]));
                                             onOpen();
                                         } else {
                                             errorChampion(res.status.status_code);

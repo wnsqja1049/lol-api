@@ -20,15 +20,20 @@ import {
 	GetSkillTooltip
 } from "@/data/functions";
 
+/* Redux */
+import { useSelector } from 'react-redux';
+import { modalChampionSelector } from '@/app/lib/redux/slice/modalChampion'
 
-export const ChampionModal = ({ onClose, modalChampion }: { onClose: () => void, modalChampion: ChampionDetail | undefined }) => {
+export const ChampionModal = ({ onClose, }: { onClose: () => void }) => {
+	
+    const modalChampion = useSelector(modalChampionSelector);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
 		setCurrentPage(1);
 	}, [modalChampion])
 
-	if(modalChampion) {
+	if(modalChampion.key > 0) {
 		return (
 			<>
 				<ModalHeader className="flex flex-row text-xl items-center gap-1">{modalChampion.name}<span className="text-sm ml-2 font-normal">{modalChampion.title}</span></ModalHeader>
@@ -37,8 +42,7 @@ export const ChampionModal = ({ onClose, modalChampion }: { onClose: () => void,
 						<Image
 							className="w-full"
 							src={`${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/champion/${modalChampion.id}.png`}
-							alt={modalChampion.name}
-							placeholder="blur"/>
+							alt={modalChampion.name}/>
 						{/* 설명 */}
 						<div className="w-full text-sm">{modalChampion.lore}</div>
 					</div>
@@ -155,9 +159,7 @@ export const ChampionModal = ({ onClose, modalChampion }: { onClose: () => void,
 					<div className="flex items-center justify-center w-full">
 						<Image
 							src={`${process.env.NEXT_PUBLIC_DB_URL}/img/champion/centered/${modalChampion.id}_${modalChampion.skins[currentPage - 1 ?? 0].num}.jpg`}
-							alt={modalChampion.name}
-							placeholder="blur"
-						/>
+							alt={modalChampion.name}/>
 					</div>
 					
 					<div className="flex items-center justify-center text-sm">

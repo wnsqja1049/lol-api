@@ -26,7 +26,14 @@ import {
 /* Component */
 import { TimeStampToTimeBefore } from "@/components/timer"
 
-export const ProfileCard = ({profile, account}: {profile: Profile, account: Account}) => {
+/* Redux */
+import { useSelector } from 'react-redux';
+import { accountSelector } from '@/app/lib/redux/slice/account'
+import { profileSelector } from '@/app/lib/redux/slice/profile'
+
+export const ProfileCard = () => {
+    const account = useSelector(accountSelector);
+    const profile = useSelector(profileSelector);
 
 	return (
 		<Card className="w-[350px] dark:bg-zinc-900 border-1 dark:border-0">

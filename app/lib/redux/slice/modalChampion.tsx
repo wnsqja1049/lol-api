@@ -1,5 +1,6 @@
 "use client";
 
+import { ChampionDetail } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -57,5 +58,7 @@ export const modalChampionSlice = createSlice({
 });
 
 export const { initModalChampion, setModalChampion } = modalChampionSlice.actions;
+
+export const modalChampionSelector = ((state: {modalChampion: ChampionDetail}) => state.modalChampion);
 
 export default modalChampionSlice.reducer;

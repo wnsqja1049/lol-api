@@ -2,8 +2,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-import { Profile } from "@/types";
-
 const initialState = {
     id: '',
     accountId: '',
@@ -28,10 +26,6 @@ export const profileSlice = createSlice({
     }
 });
 
-
-
 export const { initProfile, setProfile } = profileSlice.actions;
-
-export const profileSelector = ((state: {profile: Profile}) => state.profile);
 
 export default profileSlice.reducer;
