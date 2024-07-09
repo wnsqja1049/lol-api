@@ -300,8 +300,6 @@ export const MatchPageComponent = () => {
         }
     }
 
-
-
     const getMatches = async (puuid: string) => {
 
         var res = await fetchMatches(puuid);
@@ -311,34 +309,38 @@ export const MatchPageComponent = () => {
             var matchIdList = await res.data;
             var matchList:Match[] = [];
 
-            await Promise.all(
-                matchIdList.map(async (matchId: string) => {
-                    var match:Match = await getNewMatch(matchId);
-                    setTeams(match);
-                    matchList.push(match);
-                })
-            )
+            var statusCode = 200;
             
-            setMatchList(matchList);
+            var promises = matchIdList.map(async (matchId: string) => {
+                var res = await fetchMatch(matchId);
+                return res;
+            });
             
+            await Promise.all(promises)
+            .then(async (responseList) => {
+                for(let i = 0; i < responseList.length; i++) {
+                    if(responseList[i].status.status_code === 200) {
+                        var match = await responseList[i].data;
+                        setTeams(match);
+                        matchList.push(match);
+                    } else {
+                        statusCode = responseList[i].status.status_code
+                    }
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            if(statusCode !== 200) {
+                errorMatch(statusCode);
+            } else {
+                setMatchList(matchList);
+            }
             setIsLoading(false);
         } else {
             errorMatches(res.status.status_code);
         }
     }
-    const getNewMatch = async (matchId: string) => {
-
-        var res = await fetchMatch(matchId);
-
-        if (res.status.status_code === 200) {
-            var match = await res.data;
-            return match;
-        } else {
-            errorMatch(res.status.status_code)
-        }
-    }
-
-
 
     const getChampionMap = async () => {
 
