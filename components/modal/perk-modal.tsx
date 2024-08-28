@@ -27,12 +27,9 @@ export const PerkModal = ({ onClose, perks, perkMap }: { onClose: () => void, pe
 						</div>
 						<StatPerkSet perks={perks} perkMap={perkMap} />
 					</div>
-
 				</ModalBody>
 				<ModalFooter>
-					<Button color="primary" onPress={onClose}>
-						닫기
-					</Button>
+					<Button color="primary" onPress={onClose}>닫기</Button>
 				</ModalFooter>
 			</>);
 	} else {

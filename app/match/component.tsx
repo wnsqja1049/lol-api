@@ -70,10 +70,14 @@ import { MatchListItem } from "@/components/list/match-list"
 import { ProfileCard, RankCard } from "@/components/card"
 
 /* Redux */
-import { useDispatch, useSelector } from 'react-redux';
-import { accountSelector, initAccount, setAccount } from '@/app/lib/redux/slice/account'
-import { profileSelector, initProfile, setProfile } from '@/app/lib/redux/slice/profile'
-import { setModalChampion } from '@/app/lib/redux/slice/modalChampion'
+import { accountSelector, initAccount, setAccount } from '@/app/redux/slice/account'
+import { profileSelector, initProfile, setProfile } from '@/app/redux/slice/profile'
+import { itemMapSelector, setItemMapState } from '@/app/redux/slice/item'
+import { setModalChampion } from '@/app/redux/slice/modalChampion'
+import { SearchSummonerInput } from "@/components/input/input";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setChampionMapState } from "../redux/slice/champion";
+import { setSpellMapState } from "../redux/slice/spell";
 
 
 export const MatchPageComponent = () => {
@@ -93,7 +97,8 @@ export const MatchPageComponent = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [championMap, setChampionMap] = useState<Map<string, Champion>>();
-    const [itemMap, setItemMap] = useState<Map<string, Item>>();
+    //const [itemMap, setItemMap] = useState<Map<string, Item>>();
+    const itemMap = useAppSelector(itemMapSelector);
     const [spellMap, setSpellMap] = useState<Map<string, Spell>>();
     const [perkMap, setPerkMap] = useState<Map<string, Perk>>();
     const [augmentMap, setAugmentMap] = useState<Map<string, Augment>>();
@@ -104,9 +109,9 @@ export const MatchPageComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = useState<ModalProps["scrollBehavior"]>("inside");
 
-    const dispatch = useDispatch();
-    const account = useSelector(accountSelector);
-    const profile = useSelector(profileSelector);
+    const dispatch = useAppDispatch();
+    const account = useAppSelector(accountSelector);
+    const profile = useAppSelector(profileSelector);
 
     const isInvalid = useMemo(() => {
 
@@ -357,7 +362,10 @@ export const MatchPageComponent = () => {
                 championMap.set(champion.key, champion);
             }
 
+            console.log(championMap)
+            console.log(championMap.size)
             setChampionMap(championMap);
+            dispatch(setChampionMapState(championMap));
         } else {
             errorChampionList(res.status.status_code);
         }
@@ -378,6 +386,7 @@ export const MatchPageComponent = () => {
             }
 
             setSpellMap(spellMap);
+            dispatch(setSpellMapState(spellMap));
         } else {
             errorSpellList(res.status.status_code);
         }
@@ -397,8 +406,9 @@ export const MatchPageComponent = () => {
 
                 itemMap.set(key, item);
             }
+            console.log(itemMap)
 
-            setItemMap(itemMap);
+            dispatch(setItemMapState(itemMap));
         } else {
             errorItemList(res.status.status_code);
         }
@@ -429,7 +439,6 @@ export const MatchPageComponent = () => {
                     }
                 }
             }
-
             setPerkMap(perkMap);
         } else {
             errorPerkList(res.status.status_code);
@@ -476,15 +485,11 @@ export const MatchPageComponent = () => {
             </Modal>
 
             <div className="flex flex-row gap-2 mb-5">
-                <Input
-                    type="text"
-                    label="플레이어 이름 + #KR1"
-                    value={value}
-                    onValueChange={setValue}
+                <SearchSummonerInput 
                     isInvalid={isInvalid}
-                    color={isInvalid ? "default" : "default"}
-                    errorMessage={isInvalid && <div><b>플레이어 이름#태그</b>로 검색하세요</div>}
-                    onKeyDown={handleKeyDown}/>
+                    value={value}
+                    setValue={setValue}
+                    search={search} />
                 <Button className="h-[56px]" color="primary" onPress={() => search(value)}>검색</Button>
             </div>
             <SearchList
@@ -513,9 +518,9 @@ export const MatchPageComponent = () => {
                                     <MatchListItem 
                                     match={match}
                                     searchedUser={getSearchUser(account.puuid, match.info.participants)!}
-                                    championMap={championMap}
-                                    itemMap={itemMap}
-                                    spellMap={spellMap}
+                                    //championMap={championMap}
+                                    //itemMap={itemMap}
+                                    //spellMap={spellMap}
                                     perkMap={perkMap}
                                     augmentMap={augmentMap}
                                     onClickChampion={async (participant) => {

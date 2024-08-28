@@ -17,15 +17,14 @@ import {
 
 /* Component */
 import { SearchList } from "@/components/list/search-list"
+import { SearchSummonerInput } from "@/components/input/input";
 
 export const MainPageComponent = () => {
     const [summoners, setSummoners] = useState<UserName[]>([]);
     const [value, setValue] = useState("");
 
     const isInvalid = useMemo(() => {
-
         if (value === "") return false;
-
     }, [value]);
     
     useEffect(() => {
@@ -53,11 +52,6 @@ export const MainPageComponent = () => {
         setSummoners(filteredNameList);
         localStorage.setItem('searchUserList', JSON.stringify(filteredNameList));
     };
-    const handleKeyDown = (e: any) => {
-        if (e.key === 'Enter') {
-            search(value);
-        }
-    }
 
 
 
@@ -103,15 +97,7 @@ export const MainPageComponent = () => {
     return (
         <>
             <div className="flex flex-row gap-2 mb-5">
-                <Input
-                    type="text"
-                    label="플레이어 이름 + #KR1"
-                    value={value}
-                    onValueChange={setValue}
-                    isInvalid={isInvalid}
-                    color={isInvalid ? "default" : "default"}
-                    errorMessage={isInvalid && <div><b>플레이어 이름#태그</b>로 검색하세요</div>}
-                    onKeyDown={handleKeyDown}/>
+                <SearchSummonerInput isInvalid={isInvalid} value={value} setValue={setValue} search={search} />
                 <Button className="h-[56px]" color="primary" onPress={() => search(value)}>검색</Button>
             </div>
 

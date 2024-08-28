@@ -31,8 +31,11 @@ import { ChampionModal } from "@/components/modal/champion-modal"
 import { title } from "@/components/primitives";
 
 /* Redux */
-import { useDispatch, useSelector } from 'react-redux';
-import { modalChampionSelector, initModalChampion, setModalChampion } from '@/app/lib/redux/slice/modalChampion'
+import { modalChampionSelector, initModalChampion, setModalChampion } from '@/app/redux/slice/modalChampion'
+import { SearchChampionInput } from "@/components/input/input";
+import { ChampionFilterTabs } from "@/components/tabs/tabs";
+import { ModalChampion } from "@/components/champion/champion";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 export const ChampionPageComponent = () => {
 
@@ -111,176 +114,124 @@ export const ChampionPageComponent = () => {
 		<>
 			{rotationIdList ? 
 			<>
-				{championMap ? 
-				<div className="mb-5">
-					<h1 className={title()}>로테이션</h1>
-					<RotationChampionList championMap={championMap} rotation={rotationIdList} />
-				</div> : <></>}
+				{championMap ? <RotationChampionList championMap={championMap} rotation={rotationIdList} /> : <></>}
 			</> : <></>}
 
-			<h1 className={title()}>전체</h1>
-
-			<div className="mt-5">
-				{championList ? <AllChampionList champions={championList} /> : <></>}
-			</div>
+			{championList ? <AllChampionList champions={championList} /> : <></>}
 		</>
 	);
 };
 
 export const RotationChampionList = ({ championMap, rotation }: { championMap: Map<string, Champion>, rotation: number[]}) => {
 
-    const dispatch = useDispatch();
-    const modalChampion = useSelector(modalChampionSelector);
+    const dispatch = useAppDispatch();
+    const modalChampion = useAppSelector(modalChampionSelector);
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const [scrollBehavior, setScrollBehavior] = useState<ModalProps["scrollBehavior"]>("inside");
 
 	var championName = "";
 
+	function open (champion: Champion) {
+		dispatch(setModalChampion(champion));
+		onOpen();
+	}
+
 	return (
 		<>
-			<Modal size="4xl"
-				isOpen={isOpen}
-				onOpenChange={onOpenChange}
-				scrollBehavior={scrollBehavior}>
-				<ModalContent>
-					{(onClose) => (
-                		modalChampion && 
-						<ChampionModal onClose={onClose}/>
-					)}
-				</ModalContent>
-			</Modal>
+			<div className="mb-5">
+				<h1 className={title()}>로테이션</h1>
+				<Modal size="4xl"
+					isOpen={isOpen}
+					onOpenChange={onOpenChange}
+					scrollBehavior={scrollBehavior}>
+					<ModalContent>
+						{(onClose) => (
+							modalChampion && 
+							<ChampionModal onClose={onClose}/>
+						)}
+					</ModalContent>
+				</Modal>
 
-			<div className="flex flex-wrap mt-5">
-				{rotation && rotation.map((id) => (
-					<div key={id} className="w-[170px]">
-						<User className="cursor-pointer"
-							onClick={async () => {
-								var championId = id.toString();
-								championName = championMap.get(championId)?.id.toString()!;
-								
-								var res = await fetchChampion(championName);
-
-								if(res.status.status_code === 200) {
-									var data = await res.data;
-									var champion = data.data;
-									dispatch(setModalChampion(champion[championName]));
-									onOpen();
-								} else {
-									errorChampion(res.status.status_code);
-								}
-							}}
-							name={championMap.get(id.toString())?.name}
-							description=""
-							avatarProps={{ src: `${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/champion/${championMap.get(id.toString())?.image.full}` }} />
-					</div>
-				))}
+				<div className="flex flex-wrap mt-5">
+					{rotation && rotation.map((id) => (
+						<ModalChampion key={id} item={championMap.get(id.toString())!} open={(item) => {open(item)}} />
+					))}
+				</div>
 			</div>
 		</>
 	);
 };
 
 export const AllChampionList = ({ champions }: { champions: Champion[] }) => {
-
 	const [searchValue, setSearchValue] = useState("");
 	const [selected, setSelected] = useState("");
 
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const [scrollBehavior, setScrollBehavior] = useState<ModalProps["scrollBehavior"]>("inside");
 
-    const dispatch = useDispatch();
-    const modalChampion = useSelector(modalChampionSelector);
+    const dispatch = useAppDispatch();
+    const modalChampion = useAppSelector(modalChampionSelector);
 
 	const Hangul = require('hangul-js');
 
+
+	function open (champion: Champion) {
+		dispatch(setModalChampion(champion));
+		onOpen();
+	}
+
 	return (
 		<>
-			<Modal size="4xl"
-				isOpen={isOpen}
-				onOpenChange={onOpenChange}
-				scrollBehavior={scrollBehavior}>
-				<ModalContent>
-					{(onClose) => (
-						modalChampion && 
-						<ChampionModal onClose={onClose}/>
-					)}
-				</ModalContent>
-			</Modal>
+			<h1 className={title()}>전체</h1>
 
-			<Input type="text"
-      			className="max-w-xs"
-				isClearable
-				label="챔피언 검색 (가렌, ㄱㄹ,...)"
-				value={searchValue}
-				onValueChange={setSearchValue}/>
-			
 			<div className="mt-5">
-				<Tabs aria-label="Options"
-					selectedKey={selected}
-					onSelectionChange={(key)=>{setSelected(key.toString())}}>
-					<Tab key="" title="전체"></Tab>
-					<Tab key="ㄱ" title="ㄱ"></Tab>
-					<Tab key="ㄴ" title="ㄴ"></Tab>
-					<Tab key="ㄷ" title="ㄷ"></Tab>
-					<Tab key="ㄹ" title="ㄹ"></Tab>
-					<Tab key="ㅁ" title="ㅁ"></Tab>
-					<Tab key="ㅂ" title="ㅂ"></Tab>
-					<Tab key="ㅅ" title="ㅅ"></Tab>
-					<Tab key="ㅇ" title="ㅇ"></Tab>
-					<Tab key="ㅈ" title="ㅈ"></Tab>
-					<Tab key="ㅊ" title="ㅊ"></Tab>
-					<Tab key="ㅋ" title="ㅋ"></Tab>
-					<Tab key="ㅌ" title="ㅌ"></Tab>
-					<Tab key="ㅍ" title="ㅍ"></Tab>
-					<Tab key="ㅎ" title="ㅎ"></Tab>
-				</Tabs>
-			</div>
+				<Modal size="4xl"
+					isOpen={isOpen}
+					onOpenChange={onOpenChange}
+					scrollBehavior={scrollBehavior}>
+					<ModalContent>
+						{(onClose) => (
+							modalChampion &&
+							<ChampionModal onClose={onClose} />
+						)}
+					</ModalContent>
+				</Modal>
+
+				<SearchChampionInput value={searchValue} setValue={setSearchValue} />
+
+				<div className="mt-5">
+					<ChampionFilterTabs value={selected} setValue={setSelected} />
+				</div>
 
 
-			
-			<div className="flex flex-wrap mt-5">
-				{champions ? champions.filter((champion) => {
-					var isValid = true;
-					var searchedChosung = Hangul.disassemble(searchValue).join("");
 
-					if(searchValue == "") {
-						if(selected == "") {
-							isValid = true;
+				<div className="flex flex-wrap mt-5">
+					{champions ? champions.filter((champion) => {
+						var isValid = true;
+						var searchedChosung = Hangul.disassemble(searchValue).join("");
+
+						if (searchValue == "") {
+							if (selected == "") {
+								isValid = true;
+							} else {
+								if (champion.firstChosung.includes(selected)) {
+									isValid = true;
+								} else {
+									isValid = false;
+								}
+							}
 						} else {
-							if (champion.firstChosung.includes(selected)) {
+							if (champion.chosung.includes(searchedChosung)) {
 								isValid = true;
 							} else {
 								isValid = false;
 							}
 						}
-					} else {
-						if(champion.chosung.includes(searchedChosung)) {
-							isValid = true;
-						} else {
-							isValid = false;
-						}
-					}
-					return isValid;
-				}).map((item) => (
-						<div key={item.id} className="w-[170px]">
-							<User className="cursor-pointer"
-								onClick={async () => {
-									var championId = item.id.toString();
-									var res = await fetchChampion(championId);
-
-									if (res.status.status_code === 200) {
-										var data = await res.data;
-										var champion = data.data;
-										dispatch(setModalChampion(champion[championId]));
-										onOpen();
-									} else {
-										errorChampion(res.status.status_code);
-									}
-								}}
-								name={item.name}
-								description=""
-								avatarProps={{ src: `${process.env.NEXT_PUBLIC_DB_URL}/${process.env.NEXT_PUBLIC_VERSION}/img/champion/${item.id}.png` }} />
-						</div>
+						return isValid;
+					}).map((item) => (
+						<ModalChampion key={item.id} item={item} open={(item) => {open(item)}} />
 					)) : <></>}
+				</div>
 			</div>
 		</>
 	);

@@ -40,13 +40,17 @@ import { ArenaTeamTable } from "@/components/table/arena-team-table"
 import { ChevronIcon } from "@/components/icon/icons"
 import { nanoid } from 'nanoid';
 
+import { championMapSelector } from "@/app/redux/slice/champion";
+import { itemMapSelector } from "@/app/redux/slice/item";
+import { spellMapSelector } from "@/app/redux/slice/spell";
+import { useAppSelector } from "@/app/redux/hooks";
 
 export const MatchListItem = ({
     match, 
     searchedUser,
-    championMap,
-    itemMap,
-    spellMap,
+    //championMap,
+    //itemMap,
+    //spellMap,
     perkMap,
     augmentMap,
     onClickChampion,
@@ -55,15 +59,19 @@ export const MatchListItem = ({
 }: {
     match: Match | undefined,
     searchedUser: MatchParticipant | undefined,
-    championMap: Map<string, Champion> | undefined,
-    itemMap: Map<string, Item> | undefined,
-    spellMap: Map<string, Spell> | undefined,
+    //championMap: Map<string, Champion> | undefined,
+    //itemMap: Map<string, Item> | undefined,
+    //spellMap: Map<string, Spell> | undefined,
     perkMap: Map<string, Perk> | undefined,
     augmentMap: Map<string, Augment> | undefined,
     onClickChampion: (participant: MatchParticipant) => void,
     onClickPerk: (perks: MatchParticipantPerks) => void,
     onClickParticipant: (participant: MatchParticipant) => void,
 }) => {
+
+    const championMap = useAppSelector(championMapSelector);
+    const spellMap = useAppSelector(spellMapSelector);
+    const itemMap = useAppSelector(itemMapSelector);
 
     var bgBlue = "bg-blue-50 dark:bg-blue-900 ";
     var bgUserBlue = "bg-blue-100 dark:bg-blue-800 ";
